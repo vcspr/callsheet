@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Treatment — {{PROJECT_TITLE}}</title>
+<style>
+/* cinematic — landscape, dark, serif, full-bleed photo. Director's deck. */
+@page { size: Letter landscape; margin: 0; }
+:root {
+  --paper: {{PAPER_HEX}}; --ink: {{INK_HEX}}; --accent: {{ACCENT_HEX}}; --muted: {{MUTED_HEX}};
+  --rule: 0.5px solid var(--accent);
+  --serif: "Times New Roman","Garamond","Georgia",serif;
+  --mono: "JetBrains Mono","IBM Plex Mono","SF Mono",monospace;
+}
+* { box-sizing: border-box; }
+html, body { background: #1a1a1a; color: var(--ink); font-family: var(--serif); font-size: 10pt; line-height: 1.55; margin: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { background: var(--paper); width: 11in; height: 8.5in; padding: 0; margin: 0 auto; page-break-after: always; position: relative; display: flex; flex-direction: column; overflow: hidden; }
+@media screen { .page { box-shadow: 0 6px 30px rgba(0,0,0,0.6); margin: 12px auto; } }
+.topbar, .bottombar { display: flex; justify-content: space-between; padding: 14px 36px; font-family: var(--mono); font-size: 7pt; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+.topbar { border-bottom: var(--rule); }
+.bottombar { border-top: var(--rule); margin-top: auto; }
+.inner { padding: 36px 48px; flex: 1; display: flex; flex-direction: column; }
+h1.title { font-weight: 700; font-size: 64pt; line-height: 0.98; margin: 0; }
+h1.title.smaller { font-size: 48pt; }
+h2.sub { font-weight: 700; font-size: 26pt; line-height: 1.05; margin: 0 0 12px; }
+h3.kicker { font-family: var(--mono); font-weight: 400; font-size: 8.5pt; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin: 0 0 8px; }
+p.body { font-size: 11pt; line-height: 1.6; max-width: 5in; }
+.gold { color: var(--accent); }
+hr.thin { border: 0; border-top: var(--rule); margin: 18px 0; }
+.bleed { position: absolute; inset: 0; }
+.bleed-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.85) 100%); }
+.bleed-content { position: relative; z-index: 2; padding: 36px 48px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; }
+.cover .overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.85) 100%); z-index: 1; }
+.cover .content { position: relative; z-index: 2; padding: 0.5in 0.7in; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+.cover .center { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; margin-top: 60px; }
+.two-worlds { display: grid; grid-template-columns: 1fr 1px 1fr; padding: 0; flex: 1; }
+.two-worlds .divider { background: var(--accent); }
+.two-worlds .panel { padding: 36px; display: flex; flex-direction: column; justify-content: center; min-height: 0; }
+.shots-bleed { display: grid; grid-template-columns: 1fr 1fr; padding: 0; flex: 1; gap: 0; }
+.shots-bleed .cell { position: relative; min-height: 0; overflow: hidden; }
+.shots-bleed .cell .imgzone { position: absolute; inset: 0; }
+.shots-bleed .cell .lbl { position: absolute; bottom: 18px; left: 18px; right: 18px; font-family: var(--mono); font-size: 8pt; letter-spacing: 0.18em; text-transform: uppercase; z-index: 2; }
+.shots-bleed .cell::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.7) 100%); z-index: 1; }
+.loc-strip { display: grid; grid-template-columns: repeat(4, 1fr); flex: 1; padding: 0; }
+.loc-strip .cell { position: relative; overflow: hidden; min-height: 0; border-right: var(--rule); }
+.loc-strip .cell:last-child { border-right: 0; }
+.loc-strip .cell .imgzone { position: absolute; inset: 0; }
+.loc-strip .cell .info { position: relative; z-index: 2; padding: 18px 16px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; }
+.loc-strip .cell::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%); z-index: 1; }
+.loc-strip .info .num { font-weight: 700; font-size: 48pt; line-height: 1; color: var(--accent); margin-bottom: 6px; }
+.loc-strip .info .name { font-weight: 700; font-size: 14pt; }
+.loc-strip .info .when { font-family: var(--mono); font-size: 7pt; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-top: 4px; }
+.color-page { padding: 36px 48px; flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+.swatch-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 14px; }
+.swatch-strip > div { height: 70px; display: flex; align-items: flex-end; padding: 6px; font-family: var(--mono); font-size: 7pt; letter-spacing: 0.1em; }
+.beat { display: grid; grid-template-columns: 90px 1fr 1fr 2fr; gap: 14px; align-items: baseline; }
+.beat .t { font-family: var(--mono); font-size: 10pt; color: var(--accent); }
+.beat .cue { color: var(--accent); font-family: var(--mono); font-size: 8.5pt; text-transform: uppercase; }
+.imgzone { background-color: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: var(--muted); font-family: var(--mono); font-size: 8pt; letter-spacing: 0.16em; text-transform: uppercase; overflow: hidden; }
+.imgzone img.ref { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+</style></head>
+<body>
+
+<!-- 01 COVER -->
+<section class="page cover" style="position: relative;">
+  <div class="imgzone bleed"><img class="ref" src="refs/hero.jpg" onerror="this.remove()"><span>[ HERO MOOD PLATE ]</span></div>
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="topbar" style="border-bottom: 0; padding: 0;"><div>A FILM BY {{DIRECTOR_NAME}}</div><div>{{STUDIO}} · {{CITY}}</div></div>
+    <div class="center">
+      <h3 class="kicker">{{SOUNDTRACK}} · {{PROJECT_KIND}}</h3>
+      <h1 class="title">{{ARTIST_L1}}<br>{{ARTIST_L2}}.</h1>
+    </div>
+    <div class="bottombar" style="border-top: 0; padding: 0;"><div>{{STUDIO}}</div><div>01 / 09</div></div>
+  </div>
+</section>
+
+<!-- 02 TWO WORLDS -->
+<section class="page">
+  <div class="topbar"><div>CONCEPT — TWO WORLDS</div><div>02 / 09</div></div>
+  <div class="two-worlds">
+    <div class="panel">
+      <h3 class="kicker">{{CONCEPT_A_TAG}}</h3>
+      <h2 class="sub" style="font-size: 40pt;">{{CONCEPT_A_NAME}}.</h2>
+      <p class="body" style="font-size: 9.5pt;">{{CONCEPT_A_BODY}}</p>
+    </div>
+    <div class="divider"></div>
+    <div class="panel" style="text-align: right;">
+      <h3 class="kicker">{{CONCEPT_B_TAG}}</h3>
+      <h2 class="sub" style="font-size: 40pt;">{{CONCEPT_B_NAME}}.</h2>
+      <p class="body" style="font-size: 9.5pt; margin-left: auto;">{{CONCEPT_B_BODY}}</p>
+    </div>
+  </div>
+  <div class="bottombar"><div>{{CONCEPT_A_NAME}} · {{CONCEPT_B_NAME}}</div><div>02 / 09</div></div>
+</section>
+
+<!-- 03 QUOTE BLEED -->
+<section class="page" style="position: relative;">
+  <div class="bleed imgzone"><img class="ref" src="refs/quote.jpg" onerror="this.remove()"><span>[ CONCEPT PLATE ]</span></div>
+  <div class="bleed-overlay"></div>
+  <div class="bleed-content">
+    <h3 class="kicker">{{QUOTE_KICKER}}</h3>
+    <h2 class="sub" style="font-size: 36pt; max-width: 6in;">{{QUOTE}}</h2>
+    <p class="body" style="font-style: italic; max-width: 5in; margin-top: 8px;">{{QUOTE_BODY}}</p>
+    <div class="bottombar" style="border-top: var(--rule); margin-top: 18px;"><div>03 / 09</div><div>FULL-BLEED CONCEPT PLATE</div></div>
+  </div>
+</section>
+
+<!-- 04 KEY SHOTS 1 -->
+<section class="page">
+  <div class="topbar"><div>KEY SHOTS · 1 OF 2</div><div>04 / 09</div></div>
+  <div class="shots-bleed">
+    <div class="cell"><div class="imgzone"><img class="ref" src="refs/key1.jpg" onerror="this.remove()"><span>[ KEY SHOT 1 ]</span></div><div class="lbl">{{KEY_01_LBL}}</div></div>
+    <div class="cell"><div class="imgzone"><img class="ref" src="refs/key2.jpg" onerror="this.remove()"><span>[ KEY SHOT 2 ]</span></div><div class="lbl">{{KEY_02_LBL}}</div></div>
+  </div>
+  <div class="bottombar"><div>2 OF {{SHORTS_TOTAL}} SHORTS</div><div>04 / 09</div></div>
+</section>
+
+<!-- 05 KEY SHOTS 2 -->
+<section class="page">
+  <div class="topbar"><div>KEY SHOTS · 2 OF 2</div><div>05 / 09</div></div>
+  <div class="shots-bleed">
+    <div class="cell"><div class="imgzone"><img class="ref" src="refs/key3.jpg" onerror="this.remove()"><span>[ KEY SHOT 3 ]</span></div><div class="lbl">{{KEY_03_LBL}}</div></div>
+    <div class="cell"><div class="imgzone"><img class="ref" src="refs/key4.jpg" onerror="this.remove()"><span>[ KEY SHOT 4 ]</span></div><div class="lbl">{{KEY_04_LBL}}</div></div>
+  </div>
+  <div class="bottombar"><div>4 OF {{SHORTS_TOTAL}} SHORTS</div><div>05 / 09</div></div>
+</section>
+
+<!-- 06 LOCATIONS -->
+<section class="page">
+  <div class="topbar"><div>LOCATIONS</div><div>06 / 09</div></div>
+  <div class="loc-strip">
+    <div class="cell"><div class="imgzone"><img class="ref" src="refs/loc1.jpg" onerror="this.remove()"><span>[ LOC 01 ]</span></div><div class="info"><div class="num">01</div><div class="name">{{LOC_01_NAME}}</div><div class="when">{{LOC_01_TIMES}}</div></div></div>
+    <div class="cell"><div class="imgzone"><img class="ref" src="refs/loc2.jpg" onerror="this.remove()"><span>[ LOC 02 ]</span></div><div class="info"><div class="num">02</div><div class="name">{{LOC_02_NAME}}</div><div class="when">{{LOC_02_TIMES}}</div></div></div>
+    <div class="cell"><div class="imgzone"><img class="ref" src="refs/loc3.jpg" onerror="this.remove()"><span>[ LOC 03 ]</span></div><div class="info"><div class="num">03</div><div class="name">{{LOC_03_NAME}}</div><div class="when">{{LOC_03_TIMES}}</div></div></div>
+    <div class="cell"><div class="imgzone"><img class="ref" src="refs/loc4.jpg" onerror="this.remove()"><span>[ LOC 04 ]</span></div><div class="info"><div class="num">04</div><div class="name">{{LOC_04_NAME}}</div><div class="when">{{LOC_04_TIMES}}</div></div></div>
+  </div>
+  <div class="bottombar"><div>4 LOCATIONS · {{CITY}}</div><div>06 / 09</div></div>
+</section>
+
+<!-- 07 COLOR & GRADE -->
+<section class="page">
+  <div class="topbar"><div>COLOR &amp; GRADE</div><div>07 / 09</div></div>
+  <div class="color-page">
+    <div>
+      <h3 class="kicker">Grade</h3>
+      <h2 class="sub">{{GRADE_H2}}</h2>
+      <p class="body" style="margin-top: 12px; font-size: 10pt;">{{GRADE_LEDE}}</p>
+      <div class="swatch-strip">
+        <div style="background:{{SW_01_HEX}}; color:{{SW_01_FG}}; border: 1px solid var(--accent);">{{SW_01_NAME}}</div>
+        <div style="background:{{SW_02_HEX}}; color:{{SW_02_FG}};">{{SW_02_NAME}}</div>
+        <div style="background:{{SW_03_HEX}}; color:{{SW_03_FG}};">{{SW_03_NAME}}</div>
+        <div style="background:{{SW_04_HEX}}; color:{{SW_04_FG}};">{{SW_04_NAME}}</div>
+      </div>
+    </div>
+    <div>
+      <h3 class="kicker">Lighting moods</h3>
+      <p class="body" style="font-size: 10pt;"><strong class="gold">{{CONCEPT_A_NAME}}</strong> — {{LIGHT_A_BODY}}</p>
+      <p class="body" style="font-size: 10pt; margin-top: 14px;"><strong class="gold">{{CONCEPT_B_NAME}}</strong> — {{LIGHT_B_BODY}}</p>
+      <hr class="thin">
+      <h3 class="kicker">VFX</h3>
+      <p class="body" style="font-size: 10pt;">{{VFX_NOTE}}</p>
+    </div>
+  </div>
+  <div class="bottombar"><div>4 COLOR PALETTE</div><div>07 / 09</div></div>
+</section>
+
+<!-- 08 BEAT SPINE -->
+<section class="page">
+  <div class="topbar"><div>BEAT SPINE</div><div>08 / 09</div></div>
+  <div class="inner">
+    <h3 class="kicker">{{BEAT_LEDE}}</h3>
+    <div style="margin-top: 18px; display: flex; flex-direction: column; gap: 16px;">
+      <div class="beat"><div class="t">{{BEAT_01_TIME}}</div><div><em>{{BEAT_01_LABEL}}</em></div><div class="cue">{{BEAT_01_AUDIO}}</div><div style="font-size: 10pt;">{{BEAT_01_VISUAL}}</div></div>
+      <div class="beat"><div class="t">{{BEAT_02_TIME}}</div><div><em>{{BEAT_02_LABEL}}</em></div><div class="cue">{{BEAT_02_AUDIO}}</div><div style="font-size: 10pt;">{{BEAT_02_VISUAL}}</div></div>
+      <div class="beat"><div class="t" style="font-size: 12pt; font-weight: 700;">{{BEAT_03_TIME}}</div><div><strong class="gold">{{BEAT_03_LABEL}}</strong></div><div class="cue">{{BEAT_03_AUDIO}}</div><div style="font-size: 10pt;"><strong>{{BEAT_03_VISUAL}}</strong></div></div>
+      <div class="beat"><div class="t">{{BEAT_04_TIME}}</div><div><em>{{BEAT_04_LABEL}}</em></div><div class="cue">{{BEAT_04_AUDIO}}</div><div style="font-size: 10pt;">{{BEAT_04_VISUAL}}</div></div>
+      <div class="beat"><div class="t">{{BEAT_05_TIME}}</div><div><em>{{BEAT_05_LABEL}}</em></div><div class="cue">{{BEAT_05_AUDIO}}</div><div style="font-size: 10pt;">{{BEAT_05_VISUAL}}</div></div>
+    </div>
+  </div>
+  <div class="bottombar"><div>5 BEATS · {{SOUNDTRACK}}</div><div>08 / 09</div></div>
+</section>
+
+<!-- 09 CLOSING -->
+<section class="page" style="position: relative;">
+  <div class="bleed imgzone"><img class="ref" src="refs/closer.jpg" onerror="this.remove()"><span>[ CLOSING PLATE ]</span></div>
+  <div class="bleed-overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.95) 100%);"></div>
+  <div class="bleed-content" style="justify-content: space-between;">
+    <div class="topbar" style="border-bottom: 0; padding: 0;"><div>THANK YOU</div><div>09 / 09</div></div>
+    <div>
+      <h1 class="title" style="font-size: 80pt;">{{ARTIST_L1}}.</h1>
+      <h1 class="title smaller gold" style="margin-top: 4px;">{{CITY}}.</h1>
+      <p class="body" style="margin-top: 36px; color: var(--accent); font-family: var(--mono); font-size: 9pt; letter-spacing: 0.18em; text-transform: uppercase;">{{DIRECTOR_NAME}} · {{STUDIO}} · {{CONTACT}}</p>
+    </div>
+    <div></div>
+  </div>
+</section>
+
+</body></html>

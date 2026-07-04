@@ -1,0 +1,51 @@
+{
+  "STUDIO": "NIGHTREEL",
+  "PAPER_HEX": "#F2E3C4",
+  "INK_HEX": "#000000",
+  "ACCENT_HEX": "#B54A00",
+
+  "PROJECT_TITLE": "SUPERCUT",
+  "ARTIST_L1": "KILO NOVA",
+  "CITY": "PORTLAND",
+  "SOUNDTRACK": "Supercut · Kilo Nova",
+  "CREW_LINE": "M. Okonkwo / J. Laurent",
+  "CAST": "Kilo Nova · 1 extra (stranger)",
+  "LOCATION_LINE": "Frame Street loop · PDX",
+  "SHOOT_DATE": "Jul 18 · one night",
+  "SUB_LINE": "Shot list · Music video · The loop block · 8 setups · ~1:40",
+  "CONTACT": "hello@nightreel.example · (555) 013-2077",
+
+  "SHOT_01_ID": "L1", "SHOT_01_TIME": "0:00-0:14", "SHOT_01_TAG": "Street",
+  "SHOT_01_SETUP": "Streetlight pool wide — Kilo walks into the single pool of sodium light, rest of the block black. The song starts on his footsteps before the beat exists.",
+  "SHOT_01_LENS": "35mm · sticks", "SHOT_01_MOVE": "Locked", "SHOT_01_FX": "Low-pass intro bed · footstep foley forward · lamp buzz", "SHOT_01_DUR": "14s",
+
+  "SHOT_02_ID": "L2", "SHOT_02_TIME": "0:14-0:28", "SHOT_02_TAG": "Street",
+  "SHOT_02_SETUP": "Pass two, identical frame — stranger now visible at frame edge, too still. Audience learns the frame; the difference is the story.",
+  "SHOT_02_LENS": "35mm · sticks (match L1)", "SHOT_02_MOVE": "Locked · match L1", "SHOT_02_FX": "Split-diopter on stranger · doubled footsteps slightly out of sync", "SHOT_02_DUR": "14s",
+
+  "SHOT_03_ID": "L3", "SHOT_03_TIME": "0:28-0:42", "SHOT_03_TAG": "Street",
+  "SHOT_03_SETUP": "Pass three, tight on face under the flickering lamp — Kilo turns to camera for the first time all night.",
+  "SHOT_03_LENS": "85mm · handheld", "SHOT_03_MOVE": "Slow creep-in", "SHOT_03_FX": "Lamp flicker practical · buzz → 1-frame silence → drums", "SHOT_03_DUR": "14s",
+
+  "SHOT_04_ID": "K1", "SHOT_04_TIME": "0:42-0:58", "SHOT_04_TAG": "Security",
+  "SHOT_04_SETUP": "Security-cam angle owned at the laundromat — hard cut on the drop, timestamp burn-in running, Kilo enters frame mid-verse.",
+  "SHOT_04_LENS": "Wide security lens · locked", "SHOT_04_MOVE": "None · source-true", "SHOT_04_FX": "Timestamp burn-in · compressed source look · full mix opens", "SHOT_04_DUR": "16s",
+
+  "SHOT_05_ID": "K2", "SHOT_05_TIME": "0:58-1:10", "SHOT_05_TAG": "Dash",
+  "SHOT_05_SETUP": "Dash-cam plate under the Eastbank underpass — car rolls past Kilo performing to no one; headlights sweep him like a followspot.",
+  "SHOT_05_LENS": "Dash cam · vehicle mount", "SHOT_05_MOVE": "Drive-by · one take", "SHOT_05_FX": "Rolling-shutter wobble kept · engine + verse mix", "SHOT_05_DUR": "12s",
+
+  "SHOT_06_ID": "K3", "SHOT_06_TIME": "1:10 HIT",
+  "SHOT_06_SETUP": "THE HANDOFF. A stranger's phone vertical — Kilo takes the phone mid-frame and finishes the bar into it. The film changes hands in one move.",
+  "SHOT_06_LENS": "Phone vertical · handheld", "SHOT_06_MOVE": "Grab + arm-extended POV", "SHOT_06_FX": "Aspect punch to 9:16 · crowd yell · caption \"SUPERCUT\" hits + holds", "SHOT_06_DUR": "8s",
+
+  "SHOT_07_ID": "K4", "SHOT_07_TIME": "1:18-1:30", "SHOT_07_TAG": "Laundro",
+  "SHOT_07_SETUP": "Fluorescent interior — Kilo between the machines, security angle intercut with the phone POV. Two sources, one performance.",
+  "SHOT_07_LENS": "Security + phone · intercut", "SHOT_07_MOVE": "Source-true both", "SHOT_07_FX": "Fluorescent flicker · dryer rumble under the mix", "SHOT_07_DUR": "12s",
+
+  "SHOT_08_ID": "K5", "SHOT_08_TIME": "1:30-END", "SHOT_08_TAG": "Rooftop",
+  "SHOT_08_SETUP": "Blue-hour rooftop closer — locked wide, skyline behind, Kilo small in frame. The only 'movie' shot in the leak block, earned by everything before it.",
+  "SHOT_08_LENS": "24mm · tripod", "SHOT_08_MOVE": "Locked", "SHOT_08_FX": "Clean grade returns · beat tail · title card", "SHOT_08_DUR": "10s",
+
+  "LEGEND": "<b>Block order on the night:</b> L1-L3 (loop passes, protect the matches) → K1 (security angle) → K2 (dash-cam drive-bys) → K3 (the handoff — protect this hit) → K4 (laundromat intercut) → K5 (rooftop closer at blue hour). · <b>Cast:</b> Kilo Nova · 1 stranger extra. · <b>Props:</b> phone rig · lamp flicker dimmer · dash-cam mount. · <b>Lighting:</b> available sodium + one hidden bounce (loop) · source-true only (leak). · <b class=\"acc\">1:10 is the locked anchor</b> — aspect, sound, and grade all turn on the handoff. Everything before is composed; everything after is witnessed."
+}

@@ -1,0 +1,58 @@
+{
+  "STUDIO": "NIGHTREEL",
+  "PAPER_HEX": "#F5F4EE",
+  "INK_HEX": "#1A1A1A",
+  "MUTED_HEX": "#7A7A78",
+  "ACCENT_HEX": "#00875A",
+
+  "PROJECT_ID": "NR-041",
+  "PROJECT_TITLE": "SUPERCUT",
+  "ARTIST_L1": "KILO",
+  "ARTIST_L2": "NOVA",
+  "CITY": "PORTLAND",
+  "CONTACT": "hello@nightreel.example · (555) 013-2077",
+  "DIRECTOR_NAME": "M. Okonkwo",
+
+  "COVER_TAG": "A music film by NIGHTREEL · 2026",
+  "COVER_BODY": "A single-night, photo-led music film of modular vertical shorts. Portland, scored to SUPERCUT (3:12).",
+
+  "CONCEPT_A_NAME": "The Loop",
+  "CONCEPT_B_NAME": "The Leak",
+  "CONCEPT_LEDE": "The film splits at the drop. One rehearsed street, walked until it goes wrong; then the night's own cameras take over and tell the rest.",
+
+  "SHORTS_LEDE": "Each clip stands alone as a vertical and composes into the 3:12 hero. Different source camera, movement, and grammar per cut.",
+  "SHORTS_TOTAL": "9",
+  "CAT_01_NAME": "Streetlight Reveal", "CAT_01_DESC": "35mm locked · The Loop · 3-4s",
+  "CAT_02_NAME": "Pass Two", "CAT_02_DESC": "Match-framed repeat · The Loop · 4-5s",
+  "CAT_03_NAME": "Security Cam", "CAT_03_DESC": "Timestamp burn-in · The Leak · 5-7s",
+  "CAT_04_NAME": "Phone Vertical", "CAT_04_DESC": "Stranger's POV · The Leak · 4-6s",
+
+  "TONE_H2": "The night keeps<br>its own footage.",
+  "TONE_A_H3": "Restraint first.",
+  "TONE_A_BODY": "The loop block is composed like still photography: locked frames, patient blocking, wrongness you find on the second look.",
+  "TONE_B_H3": "Then the leak.",
+  "TONE_B_BODY": "Found-footage grammar with real-world sources only. If a camera could not exist in the scene, its shot does not exist in the film.",
+
+  "GRADE_LEDE": "Five colors carry the film across paper, screen, and grade. The volt accent marks every loop reset.",
+  "SW_01_NAME": "Paper", "SW_01_HEX": "#F5F4EE", "SW_01_USE": "Deck backgrounds · titles on white",
+  "SW_02_NAME": "Ink", "SW_02_HEX": "#1A1A1A", "SW_02_USE": "Primary text + display",
+  "SW_03_NAME": "Evergreen", "SW_03_HEX": "#00875A", "SW_03_USE": "Section tags · numerals · highlights",
+  "SW_04_NAME": "Sodium", "SW_04_HEX": "#E8A03C", "SW_04_USE": "Leak block · streetlight moments",
+  "SW_05_NAME": "Concrete", "SW_05_HEX": "#6B6B6B", "SW_05_USE": "Muted text · secondary UI",
+
+  "SPLIT_TOC": "The loop street",
+  "SPLIT_EYEBROW": "THE LOOP BLOCK",
+  "SPLIT_TITLE": "One street,<br>three passes.",
+  "SPLIT_BODY": "A hundred meters of Frame Street, locked white balance, identical framing every pass. Kilo walks; the city resets around him. The audience learns the frame so well that a moved trash can reads like a jump scare.",
+  "SPLIT_CHAR": "Available sodium light + one hidden bounce · locked tripod · matched blocking marks · 5600K held across passes · wrongness from staging, never from grade",
+
+  "MOOD_01": "STREETLIGHT POOL", "MOOD_02": "PASS TWO STRANGER", "MOOD_03": "SECURITY ANGLE", "MOOD_04": "DASH CAM",
+  "MOOD_05": "PHONE VERTICAL", "MOOD_06": "LAUNDROMAT FLUORESCENT", "MOOD_07": "UNDERPASS SODIUM", "MOOD_08": "ROOFTOP BLUE HOUR",
+
+  "LOC_LEDE": "Three locations · one night.",
+  "LOC_01_NAME": "Frame Street Loop", "LOC_01_TIMES": "EXT · 19:00-22:00",
+  "LOC_02_NAME": "Eastbank Underpass", "LOC_02_TIMES": "EXT · 22:30-01:00",
+  "LOC_03_NAME": "All-Night Laundromat", "LOC_03_TIMES": "INT · 01:30-03:30",
+  "LOC_04_NAME": "Rooftop Closer", "LOC_04_TIMES": "EXT · 04:30-05:30",
+  "SCHED_NOTE": "All permits locked · night shoot"
+}

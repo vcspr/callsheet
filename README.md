@@ -38,6 +38,13 @@ locations, palette swatches, and the schedule. Drop images named `hero.jpg`,
 
 ![Monodark treatment pages](media/monodark.png)
 
+**Editorial, cinematic, shot list.** A light photo-led treatment with generous
+whitespace, a dark serif director's deck with full-bleed plates, and the
+one-sheet shot list that runs the camera department: seven columns, cut
+numbers, an anchor row where the whole edit turns.
+
+![Editorial, cinematic, and shot list skins](media/skins-batch2.png)
+
 ## 03 / RUN IT
 
 ```bash
@@ -47,6 +54,9 @@ npm install && npx playwright install chromium
 node callsheet.mjs example/treatment.json                           # the drench deck
 node callsheet.mjs example/day.json --skin callsheet                # the day
 node callsheet.mjs example/treatment-monodark.json --skin monodark  # the heavyweight
+node callsheet.mjs example/treatment-editorial.json --skin editorial
+node callsheet.mjs example/treatment-cinematic.json --skin cinematic
+node callsheet.mjs example/shots.json --skin shotlist              # the camera dept
 ```
 
 Copy an example JSON, replace the fiction with your production, drop
@@ -73,8 +83,8 @@ zero photography and clones with nothing to license.
 
 ## 06 / END CARD
 
-On the slate: editorial and cinematic treatment skins, shot-list and storyboard skins, a one-line schedule, budget
-top-sheets, and a 16:9 screener variant.
+On the slate: a storyboard skin, a one-line schedule, budget top-sheets, and a
+16:9 screener variant.
 
 [MIT](LICENSE) © 2026 Victor Uwakwe
 

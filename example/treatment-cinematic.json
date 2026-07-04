@@ -1,0 +1,56 @@
+{
+  "STUDIO": "NIGHTREEL",
+  "PAPER_HEX": "#0A0908",
+  "INK_HEX": "#F0E8D4",
+  "MUTED_HEX": "#888070",
+  "ACCENT_HEX": "#C9A55A",
+
+  "PROJECT_ID": "NR-041",
+  "PROJECT_KIND": "A MUSIC FILM",
+  "PROJECT_TITLE": "SUPERCUT",
+  "ARTIST_L1": "KILO",
+  "ARTIST_L2": "NOVA",
+  "CITY": "PORTLAND",
+  "SOUNDTRACK": "SUPERCUT (3:12)",
+  "CONTACT": "hello@nightreel.example",
+  "DIRECTOR_NAME": "M. OKONKWO",
+  "SHORTS_TOTAL": "9",
+
+  "CONCEPT_A_TAG": "Before the drop · rehearsed",
+  "CONCEPT_A_NAME": "The Loop",
+  "CONCEPT_A_BODY": "One street, locked frames, patient blocking. Kilo walks the same hundred meters while the city resets around him. The wrongness compounds pass by pass.",
+  "CONCEPT_B_TAG": "After the drop · stolen",
+  "CONCEPT_B_NAME": "The Leak",
+  "CONCEPT_B_BODY": "The night's own cameras take over. Security angles, dash cams, a stranger's vertical. The song assembles itself out of what got recorded.",
+
+  "QUOTE_KICKER": "The Loop · pass three",
+  "QUOTE": "“The street remembers the take.”",
+  "QUOTE_BODY": "Tight on face under the flickering lamp. Kilo turns to camera for the first time all night. The drop lands on the cut to black.",
+
+  "KEY_01_LBL": "C3 · PASS THREE → BLACK · DROP HIT · 85MM",
+  "KEY_02_LBL": "C4 · SECURITY CAM · TIMESTAMP BURN-IN · WIDE",
+  "KEY_03_LBL": "C6 · UNDERPASS SODIUM · HANDHELD · 35MM",
+  "KEY_04_LBL": "C9 · ROOFTOP CLOSER · BLUE HOUR · 24MM",
+
+  "LOC_01_NAME": "Frame Street", "LOC_01_TIMES": "EXT · DUSK",
+  "LOC_02_NAME": "Eastbank Underpass", "LOC_02_TIMES": "EXT · NIGHT",
+  "LOC_03_NAME": "Laundromat", "LOC_03_TIMES": "INT · PRACTICAL",
+  "LOC_04_NAME": "Rooftop", "LOC_04_TIMES": "EXT · BLUE HOUR",
+
+  "GRADE_H2": "Clean neutral<br><em class=\"gold\">— then sodium.</em>",
+  "GRADE_LEDE": "Two grades, one night. The loop holds a clean neutral so the frame reads honest; the leak block inherits whatever its source camera does to color.",
+  "SW_01_NAME": "NIGHT INK", "SW_01_HEX": "#0A0908", "SW_01_FG": "#C9A55A",
+  "SW_02_NAME": "SHADOW", "SW_02_HEX": "#1A1816", "SW_02_FG": "#F0E8D4",
+  "SW_03_NAME": "SODIUM", "SW_03_HEX": "#C9A55A", "SW_03_FG": "#0A0908",
+  "SW_04_NAME": "CREAM", "SW_04_HEX": "#F0E8D4", "SW_04_FG": "#0A0908",
+  "LIGHT_A_BODY": "Available sodium plus one hidden bounce. Locked white balance across passes; the frame never changes, only the world inside it.",
+  "LIGHT_B_BODY": "Source-accurate. Fluorescents, headlights, phone torches. No movie lights in leak frames.",
+  "VFX_NOTE": "Minimal. Timestamp burn-ins, one split-diopter, speed ramps on the climax reel only. No comped elements.",
+
+  "BEAT_LEDE": "Supercut structure · cuts",
+  "BEAT_01_TIME": "0:00-0:14", "BEAT_01_LABEL": "Intro · drowned", "BEAT_01_AUDIO": "LOW-PASS ON", "BEAT_01_VISUAL": "Black. Title card. Streetlight flickers on.",
+  "BEAT_02_TIME": "0:14-0:42", "BEAT_02_LABEL": "Pre-drop · the loop", "BEAT_02_AUDIO": "VOCAL PUNCHES THROUGH", "BEAT_02_VISUAL": "Three passes of Frame Street, wrongness compounding.",
+  "BEAT_03_TIME": "0:42", "BEAT_03_LABEL": "DROP", "BEAT_03_AUDIO": "FULL VOLUME · FILTER OFF", "BEAT_03_VISUAL": "Hard cut to the security-cam angle, timestamp burning in.",
+  "BEAT_04_TIME": "0:42-2:10", "BEAT_04_LABEL": "Verse · the leak", "BEAT_04_AUDIO": "OPEN MIX", "BEAT_04_VISUAL": "Found-footage chain: dash cam, phone vertical, ATM cam.",
+  "BEAT_05_TIME": "2:10-3:12", "BEAT_05_LABEL": "Outro", "BEAT_05_AUDIO": "TAIL", "BEAT_05_VISUAL": "The loop street, empty now. Title card."
+}

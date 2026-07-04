@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Treatment — {{PROJECT_TITLE}}</title>
+<style>
+/* monodark — 12-col modular grid · monospace body · hairline rules.
+   Palette is fully token-driven: dark by default, light with two hex swaps. */
+@page { size: Letter; margin: 0; }
+:root {
+  --ink: {{INK_HEX}};
+  --rule: {{INK_HEX}};
+  --muted: {{MUTED_HEX}};
+  --paper: {{PAPER_HEX}};
+  --accent: {{ACCENT_HEX}};
+  --hairline: 1px solid var(--rule);
+  --mono: "JetBrains Mono", "IBM Plex Mono", "SF Mono", "Menlo", monospace;
+  --sans: "Helvetica Neue", "Inter", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { background: #2c2c2c; color: var(--ink); font-family: var(--mono); font-size: 9pt; line-height: 1.4; margin: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+@media print { html, body { background: var(--paper); } }
+.page { background: var(--paper); width: 8.5in; height: 11in; padding: 0.5in 0.6in; margin: 0 auto; page-break-after: always; position: relative; display: flex; flex-direction: column; overflow: hidden; }
+@media screen { .page { box-shadow: 0 1px 3px rgba(0,0,0,0.3); margin: 12px auto; } }
+.topbar { display: flex; justify-content: space-between; align-items: center; border-top: var(--hairline); border-bottom: var(--hairline); padding: 5px 0; font-size: 7pt; letter-spacing: 0.22em; }
+.bottombar { display: flex; justify-content: space-between; align-items: center; border-top: var(--hairline); padding: 5px 0; margin-top: auto; font-size: 7pt; letter-spacing: 0.22em; color: var(--muted); }
+.grid12 { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.eyebrow, .kicker { font-size: 7.5pt; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+.section-tag { font-family: var(--sans); font-weight: 800; font-size: 13pt; letter-spacing: 0.18em; border-top: var(--hairline); padding-top: 8px; }
+h1.display { font-family: var(--sans); font-weight: 800; font-size: 64pt; line-height: 0.88; letter-spacing: -0.01em; margin: 0; }
+h1.display.huge { font-size: 92pt; }
+h2.world-label { font-family: var(--sans); font-weight: 800; font-size: 56pt; letter-spacing: -0.01em; line-height: 1; margin: 0 0 8px; }
+h3.title { font-family: var(--sans); font-weight: 800; font-size: 11pt; letter-spacing: 0.18em; margin: 0 0 6px; }
+.lede { font-size: 10pt; line-height: 1.5; }
+.muted { color: var(--muted); }
+.gold { color: var(--accent); }
+hr.thin { border: 0; border-top: var(--hairline); margin: 12px 0; }
+.imgzone { border: 1px dashed var(--muted); position: relative; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 6.5pt; letter-spacing: 0.2em; text-transform: uppercase; min-height: 100px; overflow: hidden; }
+.imgzone img.ref { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.imgzone.tall { min-height: 180px; }
+.imgzone.hero { min-height: 5.2in; }
+.cover .hero-stack { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 18px 0; }
+.cover .meta-block { border-top: var(--hairline); border-bottom: var(--hairline); padding: 10px 0; margin: 14px 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.cover .meta-block .k { font-size: 6.8pt; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; margin-bottom: 2px; }
+.cover .meta-block .v { font-size: 8.5pt; }
+.deliv-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+.deliv-table th, .deliv-table td { text-align: left; padding: 6px 8px 6px 0; font-size: 8pt; vertical-align: top; border-bottom: var(--hairline); }
+.deliv-table th { font-size: 6.8pt; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; }
+.callout { border: var(--hairline); padding: 12px 14px; font-size: 9pt; line-height: 1.4; }
+.callout .label { font-family: var(--sans); font-weight: 800; font-size: 8pt; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 4px; display: block; }
+.world-split { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.world-split > div { padding: 14px 18px; }
+.world-split > div + div { border-left: var(--hairline); }
+.world-tag { font-size: 7.5pt; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.timeline { margin-top: 14px; padding: 14px 0; border-top: var(--hairline); border-bottom: var(--hairline); }
+.timeline-track { position: relative; height: 28px; background: linear-gradient(to right, var(--muted) 0%, var(--muted) 15%, var(--ink) 15%, var(--ink) {{DROP_PCT}}%, var(--accent) {{DROP_PCT}}%, var(--accent) calc({{DROP_PCT}}% + 1.5%), var(--ink) calc({{DROP_PCT}}% + 1.5%), var(--ink) 78%, var(--muted) 78%, var(--muted) 100%); }
+.timeline-marks { display: flex; justify-content: space-between; font-size: 7pt; letter-spacing: 0.18em; color: var(--muted); margin-top: 6px; }
+.beat-row { display: grid; grid-template-columns: 80px 1fr 1.2fr 1.4fr; gap: 14px; padding: 10px 0; border-bottom: var(--hairline); font-size: 8.5pt; }
+.beat-row.drop .t, .beat-row.drop .lbl { color: var(--accent); }
+.beat-row .t { font-family: var(--sans); font-weight: 800; font-size: 9.5pt; }
+.beat-row .lbl { font-size: 7.5pt; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+.shorts-grid { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
+.short-card { border: var(--hairline); display: flex; flex-direction: column; overflow: hidden; }
+.short-card .img { min-height: 1.6in; border-bottom: var(--hairline); }
+.short-card .body { padding: 10px 12px; flex: 1; font-size: 7.5pt; line-height: 1.45; }
+.short-card .id { font-family: var(--sans); font-weight: 800; font-size: 13pt; margin: 0 0 2px; }
+.short-card .loc { font-size: 6.8pt; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.short-card .title-line { font-family: var(--sans); font-weight: 700; font-size: 9pt; margin-bottom: 4px; }
+.short-card .duration { font-size: 7pt; color: var(--accent); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 8px; }
+.short-card dl { margin: 0; }
+.short-card dt { font-size: 6.5pt; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+.short-card dd { margin: 0 0 2px; font-size: 7.5pt; }
+.spec-block { border: var(--hairline); padding: 14px 16px; margin-bottom: 12px; }
+.spec-block .lbl { font-family: var(--sans); font-weight: 800; font-size: 8pt; letter-spacing: 0.2em; margin-bottom: 6px; display: block; text-transform: uppercase; }
+.locations-2x2 { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 14px; }
+.loc-card { display: flex; flex-direction: column; border: var(--hairline); }
+.loc-card .img { flex: 1; min-height: 2in; border-bottom: var(--hairline); }
+.loc-card .body { padding: 10px 12px; }
+.loc-card .num { font-family: var(--sans); font-weight: 800; font-size: 24pt; line-height: 1; }
+.loc-card .name { font-family: var(--sans); font-weight: 800; font-size: 11pt; letter-spacing: 0.08em; text-transform: uppercase; margin: 4px 0 2px; }
+.swatch-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 16px; }
+.swatch { height: 80px; display: flex; flex-direction: column; justify-content: flex-end; padding: 6px 8px; font-size: 6.5pt; letter-spacing: 0.1em; }
+.sched-timeline { margin-top: 14px; display: grid; grid-template-columns: 110px 1fr; }
+.sched-row { display: contents; }
+.sched-row .when { padding: 12px 14px 12px 0; border-bottom: var(--hairline); font-family: var(--sans); font-weight: 800; font-size: 9pt; }
+.sched-row .what { padding: 12px 0 12px 14px; border-bottom: var(--hairline); border-left: var(--hairline); font-size: 8.5pt; }
+.sched-row.shoot .when { color: var(--accent); }
+.closing { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.closing .massive { font-family: var(--sans); font-weight: 800; font-size: 120pt; line-height: 0.9; letter-spacing: -0.02em; margin: 0; }
+.closing .city { font-family: var(--sans); font-weight: 800; font-size: 28pt; letter-spacing: 0.4em; color: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- 01 COVER -->
+<section class="page cover">
+  <div class="topbar"><div>TREATMENT — {{STUDIO}}</div><div>#{{PROJECT_ID}} · PAGE 01/10</div></div>
+  <div class="hero-stack">
+    <div class="kicker" style="margin-bottom:14px;">{{PROJECT_KIND}} · {{CITY}} · SCORED TO {{SOUNDTRACK}}</div>
+    <div style="margin-bottom:18px;">
+      <h1 class="display huge">{{ARTIST_L1}}<br>{{ARTIST_L2}}.</h1>
+      <div class="kicker gold" style="margin-top:14px; font-size:11pt;">{{PROJECT_TITLE}} <span class="muted">{{CAMPAIGN_TAG}}</span></div>
+    </div>
+    <div class="imgzone hero" style="margin:12px 0;"><img class="ref" src="refs/hero.jpg" onerror="this.remove()"><span>[ HERO MOOD PLATE ]</span></div>
+    <div class="meta-block">
+      <div><div class="k">Director</div><div class="v">{{DIRECTOR_NAME}}</div></div>
+      <div><div class="k">DP / Editor</div><div class="v">{{DP_NAME}}</div></div>
+      <div><div class="k">Producer</div><div class="v">{{PRODUCER_NAME}}</div></div>
+      <div><div class="k">Shoot</div><div class="v">{{SHOOT_DATE}} <span class="muted">({{SHOOT_STATUS}})</span></div></div>
+    </div>
+  </div>
+  <div class="bottombar"><div>{{STUDIO}} · {{CITY}}</div><div>{{CONTACT}}</div></div>
+</section>
+
+<!-- 02 THESIS + DELIVERABLES -->
+<section class="page">
+  <div class="topbar"><div>TREATMENT — {{STUDIO}}</div><div>#{{PROJECT_ID}} · PAGE 02/10</div></div>
+  <div class="section-tag" style="margin-top:16px;">01 · THESIS &amp; DELIVERABLES</div>
+  <div class="grid12" style="margin-top:18px;">
+    <div style="grid-column: span 7;">
+      <p class="lede" style="margin-top:0;">{{THESIS}}</p>
+      <div class="callout" style="margin-top:18px;"><span class="label">Capture model</span>{{CAPTURE_MODEL}}</div>
+    </div>
+    <div style="grid-column: span 5;">
+      <div class="kicker">DELIVERABLES</div>
+      <table class="deliv-table">
+        <thead><tr><th>Asset</th><th>Format</th><th>Length</th></tr></thead>
+        <tbody>
+          <tr><td><strong>{{DELIV_01_ASSET}}</strong></td><td>{{DELIV_01_FORMAT}}</td><td>{{DELIV_01_LEN}}</td></tr>
+          <tr><td>{{DELIV_02_ASSET}}</td><td>{{DELIV_02_FORMAT}}</td><td>{{DELIV_02_LEN}}</td></tr>
+          <tr><td>{{DELIV_03_ASSET}}</td><td>{{DELIV_03_FORMAT}}</td><td>{{DELIV_03_LEN}}</td></tr>
+          <tr><td>{{DELIV_04_ASSET}}</td><td>{{DELIV_04_FORMAT}}</td><td>{{DELIV_04_LEN}}</td></tr>
+          <tr><td>{{DELIV_05_ASSET}}</td><td>{{DELIV_05_FORMAT}}</td><td>{{DELIV_05_LEN}}</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="bottombar"><div>{{STUDIO}} · {{CITY}}</div><div>{{ARTIST_L1}} · {{PROJECT_TITLE}}</div></div>
+</section>
+
+<!-- 03 CONCEPT · TWO WORLDS -->
+<section class="page" style="padding-left:0; padding-right:0;">
+  <div style="padding:0 0.6in;" class="topbar"><div>TREATMENT — {{STUDIO}}</div><div>#{{PROJECT_ID}} · PAGE 03/10</div></div>
+  <div class="section-tag" style="margin:16px 0.6in 0;">02 · CONCEPT — TWO WORLDS</div>
+  <p class="lede" style="margin:8px 0.6in 14px;">{{CONCEPT_LEDE}}</p>
+  <div class="world-split">
+    <div>
+      <div class="world-tag">{{CONCEPT_A_TAG}}</div>
+      <h2 class="world-label">{{CONCEPT_A_NAME}}.</h2>
+      <div class="imgzone tall" style="margin-bottom:10px;"><img class="ref" src="refs/world-a.jpg" onerror="this.remove()"><span>[ WORLD A PLATE ]</span></div>
+      <p style="font-size:9pt; line-height:1.5;">{{CONCEPT_A_BODY}}</p>
+      <div class="kicker gold" style="margin-top:10px;">{{CONCEPT_A_LOOK}}</div>
+    </div>
+    <div>
+      <div class="world-tag">{{CONCEPT_B_TAG}}</div>
+      <h2 class="world-label">{{CONCEPT_B_NAME}}.</h2>
+      <div class="imgzone tall" style="margin-bottom:10px;"><img class="ref" src="refs/world-b.jpg" onerror="this.remove()"><span>[ WORLD B PLATE ]</span></div>
+      <p style="font-size:9pt; line-height:1.5;">{{CONCEPT_B_BODY}}</p>
+      <div class="kicker gold" style="margin-top:10px;">{{CONCEPT_B_LOOK}}</div>
+    </div>
+  </div>
+  <div style="padding:0 0.6in;" class="bottombar"><div>{{STUDIO}} · {{CITY}}</div><div>{{ARTIST_L1}} · {{PROJECT_TITLE}}</div></div>
+</section>
+
+<!-- 04 BEAT SPINE -->
+<section class="page">
+  <div class="topbar"><div>TREATMENT — {{STUDIO}}</div><div>#{{PROJECT_ID}} · PAGE 04/10</div></div>
+  <div class="section-tag" style="margin-top:16px;">03 · BEAT SPINE</div>
+  <p class="lede" style="margin-top:8px;">{{BEAT_LEDE}}</p>
+  <div class="timeline">
+    <div class="timeline-track"></div>
+    <div class="timeline-marks"><span>{{MARK_01}}</span><span>{{MARK_02}}</span><span class="gold">{{MARK_03}}</span><span>{{MARK_04}}</span><span>{{MARK_05}}</span></div>
+  </div>
+  <div style="margin-top:16px;">
+    <div class="beat-row"><div class="t">{{BEAT_01_TIME}}</div><div><div class="lbl">{{BEAT_01_LABEL}}</div></div><div><span class="kicker">AUDIO</span><br>{{BEAT_01_AUDIO}}</div><div><span class="kicker">VISUAL</span><br>{{BEAT_01_VISUAL}}</div></div>
+    <div class="beat-row"><div class="t">{{BEAT_02_TIME}}</div><div><div class="lbl">{{BEAT_02_LABEL}}</div></div><div><span class="kicker">AUDIO</span><br>{{BEAT_02_AUDIO}}</div><div><span class="kicker">VISUAL</span><br>{{BEAT_02_VISUAL}}</div></div>
+    <div class="beat-row drop"><div class="t">{{BEAT_03_TIME}}</div><div><div class="lbl">{{BEAT_03_LABEL}}</div></div><div><span class="kicker">AUDIO</span><br>{{BEAT_03_AUDIO}}</div><div><span class="kicker">VISUAL</span><br>{{BEAT_03_VISUAL}}</div></div>
+    <div class="beat-row"><div class="t">{{BEAT_04_TIME}}</div><div><div class="lbl">{{BEAT_04_LABEL}}</div></div><div><span class="kicker">AUDIO</span><br>{{BEAT_04_AUDIO}}</div><div><span class="kicker">VISUAL</span><br>{{BEAT_04_VISUAL}}</div></div>
+    <div class="beat-row"><div class="t">{{BEAT_05_TIME}}</div><div><div class="lbl">{{BEAT_05_LABEL}}</div></div><div><span class="kicker">AUDIO</span><br>{{BEAT_05_AUDIO}}</div><div><span class="kicker">VISUAL</span><br>{{BEAT_05_VISUAL}}</div></div>
+  </div>
+  <div class="bottombar"><div>{{STUDIO}} · {{CITY}}</div><div>{{ARTIST_L1}} · {{PROJECT_TITLE}}</div></div>
+</section>
+
+<!-- 05 SHORTS MATRIX -->
+<section class="page">
+  <div class="topbar"><div>TREATMENT — {{STUDIO}}</div><div>#{{PROJECT_ID}} · PAGE 05/10</div></div>
+  <div class="section-tag" style="margin-top:16px;">04 · SHORTS MATRIX — 3 OF {{SHORTS_TOTAL}}</div>
+  <p class="lede" style="margin-top:8px;">{{SHORTS_LEDE}}</p>
+  <div class="shorts-grid">
+    <div class="short-card">
+      <div class="imgzone img"><img class="ref" src="refs/s1.jpg" onerror="this.remove()"><span>[ {{S1_ID}} STILL ]</span></div>
+      <div class="body">
+        <div class="id">{{S1_ID}}</div><div class="loc">{{S1_LOC}}</div>
+        <div class="title-line">{{S1_TITLE}}</div><div class="duration">{{S1_DUR}}</div>
+        <dl>
+          <dt>Frame</dt><dd>{{S1_FRAME}}</dd><dt>Lens / cam</dt><dd>{{S1_LENS}}</dd>
+          <dt>Movement</dt><dd>{{S1_MOVE}}</dd><dt>FX</dt><dd>{{S1_FX}}</dd>
+          <dt>SFX</dt><dd>{{S1_SFX}}</dd><dt>Out</dt><dd>{{S1_OUT}}</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="short-card">
+      <div class="imgzone img"><img class="ref" src="refs/s2.jpg" onerror="this.remove()"><span>[ {{S2_ID}} STILL ]</span></div>
+      <div class="body">
+        <div class="id">{{S2_ID}}</div><div class="loc">{{S2_LOC}}</div>
+        <div class="title-line">{{S2_TITLE}}</div><div class="duration">{{S2_DUR}}</div>
+        <dl>
+          <dt>Frame</dt><dd>{{S2_FRAME}}</dd><dt>Lens / cam</dt><dd>{{S2_LENS}}</dd>
+          <dt>Movement</dt><dd>{{S2_MOVE}}</dd><dt>FX</dt><dd>{{S2_FX}}</dd>
+          <dt>SFX</dt><dd>{{S2_SFX}}</dd><dt>Out</dt><dd>{{S2_OUT}}</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="short-card">
+      <div class="imgzone img"><img class="ref" src="refs/s3.jpg" onerror="this.remove()"><span>[ {{S3_ID}} STILL ]</span></div>
+      <div class="body">
+        <div class="id">{{S3_ID}}</div><div class="loc">{{S3_LOC}}</div>
+        <div class="title-line">{{S3_TITLE}}</div><div class="duration">{{S3_DUR}}</div>
+        <dl>
+          <dt>Frame</dt><dd>{{S3_FRAME}}</dd><dt>Lens / cam</dt><dd>{{S3_LENS}}</dd>
+          <dt>Movement</dt><dd>{{S3_MOVE}}</dd><dt>FX</dt><dd>{{S3_FX}}</dd>
+          <dt>SFX</dt><dd>{{S3_SFX}}</dd><dt>Out</dt><dd>{{S3_OUT}}</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="bottombar"><div>3 OF {{SHORTS_TOTAL}} SHOWN</div><div>{{ARTIST_L1}} · {{PROJECT_TITLE}}</div></div>
+</section>
+
+<!-- 06 TALENT + GRAMMAR -->
+<section class="page">
+  <div class="topbar"><div>TREATMENT — {{STUDIO}}</div><div>#{{PROJECT_ID}} · PAGE 06/10</div></div>
+  <div class="section-tag" style="margin-top:16px;">05 · TALENT · WARDROBE · GRAMMAR</div>
+  <div class="grid2" style="margin-top:18px; flex:1;">
+    <div>
+      <div class="spec-block"><span class="lbl">{{TALENT_01_LBL}}</span>{{TALENT_01_BODY}}</div>
+      <div class="spec-block"><span class="lbl">{{TALENT_02_LBL}}</span>{{TALENT_02_BODY}}</div>
+      <div class="spec-block"><span class="lbl">{{TALENT_03_LBL}}</span>{{TALENT_03_BODY}}</div>
+    </div>
+    <div>
+      <h3 class="title" style="border-top: var(--hairline); padding-top:8px;">FX / SFX VOCABULARY</h3>
+      <div class="spec-block"><span class="lbl">{{GRAM_01_LBL}}</span>{{GRAM_01_BODY}}</div>
+      <div class="spec-block"><span class="lbl">{{GRAM_02_LBL}}</span>{{GRAM_02_BODY}}</div>
+      <div class="spec-block"><span class="lbl">{{GRAM_03_LBL}}</span>{{GRAM_03_BODY}}</div>
+      <div class="spec-block" style="border-color: var(--accent);"><span class="lbl gold">Signature</span>{{SIGNATURE}}</div>
+    </div>
+  </div>
+  <div class="bottombar"><div>{{STUDIO}} · {{CITY}}</div><div>{{ARTIST_L1}} · {{PROJECT_TITLE}}</div></div>
+</section>
+
+<!-- 07 LOCATIONS -->
+<section class="page">
+  <div class="topbar"><div>TREATMENT — {{STUDIO}}</div><div>#{{PROJECT_ID}} · PAGE 07/10</div></div>
+  <div class="section-tag" style="margin-top:16px;">06 · LOCATIONS</div>
+  <p class="lede" style="margin-top:8px;">{{LOC_LEDE}}</p>
+  <div class="locations-2x2">
+    <div class="loc-card">
+      <div class="imgzone img"><img class="ref" src="refs/loc1.jpg" onerror="this.remove()"><span>[ LOC 01 ]</span></div>
+      <div class="body"><div style="display:flex; justify-content:space-between; align-items:baseline;"><span class="num">01</span><span class="kicker">{{LOC_01_TIMES}}</span></div><div class="name">{{LOC_01_NAME}}</div><div style="font-size:8pt; color:var(--muted);">{{LOC_01_NOTE}}</div></div>
+    </div>
+    <div class="loc-card">
+      <div class="imgzone img"><img class="ref" src="refs/loc2.jpg" onerror="this.remove()"><span>[ LOC 02 ]</span></div>
+      <div class="body"><div style="display:flex; justify-content:space-between; align-items:baseline;"><span class="num">02</span><span class="kicker">{{LOC_02_TIMES}}</span></div><div class="name">{{LOC_02_NAME}}</div><div style="font-size:8pt; color:var(--muted);">{{LOC_02_NOTE}}</div></div>
+    </div>
+    <div class="loc-card">
+      <div class="imgzone img"><img class="ref" src="refs/loc3.jpg" onerror="this.remove()"><span>[ LOC 03 ]</span></div>
+      <div class="body"><div style="display:flex; justify-content:space-between; align-items:baseline;"><span class="num">03</span><span class="kicker">{{LOC_03_TIMES}}</span></div><div class="name">{{LOC_03_NAME}}</div><div style="font-size:8pt; color:var(--muted);">{{LOC_03_NOTE}}</div></div>
+    </div>
+    <div class="loc-card">
+      <div class="imgzone img"><img class="ref" src="refs/loc4.jpg" onerror="this.remove()"><span>[ LOC 04 ]</span></div>
+      <div class="body"><div style="display:flex; justify-content:space-between; align-items:baseline;"><span class="num">04</span><span class="kicker">{{LOC_04_TIMES}}</span></div><div class="name">{{LOC_04_NAME}}</div><div style="font-size:8pt; color:var(--muted);">{{LOC_04_NOTE}}</div></div>
+    </div>
+  </div>
+  <div class="bottombar"><div>{{STUDIO}} · {{CITY}}</div><div>{{ARTIST_L1}} · {{PROJECT_TITLE}}</div></div>
+</section>
+
+<!-- 08 COLOR + POST -->
+<section class="page">
+  <div class="topbar"><div>TREATMENT — {{STUDIO}}</div><div>#{{PROJECT_ID}} · PAGE 08/10</div></div>
+  <div class="section-tag" style="margin-top:16px;">07 · COLOR &amp; POST</div>
+  <p class="lede" style="margin-top:8px;">{{GRADE_LEDE}}</p>
+  <h3 class="title" style="margin-top:18px; border-top: var(--hairline); padding-top:10px;">PALETTE</h3>
+  <div class="swatch-row">
+    <div class="swatch" style="background:{{SW_01_HEX}}; color:{{SW_01_FG}};">{{SW_01_NAME}}<br>{{SW_01_HEX}}</div>
+    <div class="swatch" style="background:{{SW_02_HEX}}; color:{{SW_02_FG}};">{{SW_02_NAME}}<br>{{SW_02_HEX}}</div>
+    <div class="swatch" style="background:{{SW_03_HEX}}; color:{{SW_03_FG}};">{{SW_03_NAME}}<br>{{SW_03_HEX}}</div>
+    <div class="swatch" style="background:{{SW_04_HEX}}; color:{{SW_04_FG}};">{{SW_04_NAME}}<br>{{SW_04_HEX}}</div>
+    <div class="swatch" style="background:{{SW_05_HEX}}; color:{{SW_05_FG}};">{{SW_05_NAME}}<br>{{SW_05_HEX}}</div>
+    <div class="swatch" style="background:{{SW_06_HEX}}; color:{{SW_06_FG}};">{{SW_06_NAME}}<br>{{SW_06_HEX}}</div>
+  </div>
+  <div class="grid2" style="margin-top:8px;">
+    <div class="spec-block"><span class="lbl">{{LIGHT_A_LBL}}</span>{{LIGHT_A_BODY}}</div>
+    <div class="spec-block"><span class="lbl">{{LIGHT_B_LBL}}</span>{{LIGHT_B_BODY}}</div>
+  </div>
+  <div class="callout" style="margin-top:12px; border-color: var(--accent);"><span class="label gold">VFX BUDGET</span>{{VFX_NOTE}}</div>
+  <div class="bottombar"><div>{{STUDIO}} · {{CITY}}</div><div>{{ARTIST_L1}} · {{PROJECT_TITLE}}</div></div>
+</section>
+
+<!-- 09 SCHEDULE -->
+<section class="page">
+  <div class="topbar"><div>TREATMENT — {{STUDIO}}</div><div>#{{PROJECT_ID}} · PAGE 09/10</div></div>
+  <div class="section-tag" style="margin-top:16px;">08 · SCHEDULE</div>
+  <p class="lede" style="margin-top:8px;"><span class="muted">{{SCHED_NOTE}}</span></p>
+  <div class="sched-timeline">
+    <div class="sched-row"><div class="when">{{SCHED_01_WHEN}}</div><div class="what">{{SCHED_01_WHAT}}</div></div>
+    <div class="sched-row"><div class="when">{{SCHED_02_WHEN}}</div><div class="what">{{SCHED_02_WHAT}}</div></div>
+    <div class="sched-row"><div class="when">{{SCHED_03_WHEN}}</div><div class="what">{{SCHED_03_WHAT}}</div></div>
+    <div class="sched-row shoot"><div class="when">{{SCHED_SHOOT_WHEN}}</div><div class="what"><strong>{{SCHED_SHOOT_WHAT}}</strong></div></div>
+    <div class="sched-row"><div class="when">{{SCHED_04_WHEN}}</div><div class="what">{{SCHED_04_WHAT}}</div></div>
+    <div class="sched-row"><div class="when">{{SCHED_05_WHEN}}</div><div class="what">{{SCHED_05_WHAT}}</div></div>
+    <div class="sched-row"><div class="when">{{SCHED_06_WHEN}}</div><div class="what">{{SCHED_06_WHAT}}</div></div>
+  </div>
+  <h3 class="title" style="margin-top:24px; border-top: var(--hairline); padding-top:10px;">CREW</h3>
+  <div class="grid3" style="margin-top:8px;">
+    <div class="spec-block"><span class="lbl">Director</span>{{DIRECTOR_NAME}}</div>
+    <div class="spec-block"><span class="lbl">Producer</span>{{PRODUCER_NAME}}</div>
+    <div class="spec-block"><span class="lbl">DP / Editor</span>{{DP_NAME}}</div>
+  </div>
+  <div class="bottombar"><div>{{STUDIO}} · {{CITY}}</div><div>{{ARTIST_L1}} · {{PROJECT_TITLE}}</div></div>
+</section>
+
+<!-- 10 CLOSING -->
+<section class="page">
+  <div class="topbar"><div>TREATMENT — {{STUDIO}}</div><div>#{{PROJECT_ID}} · PAGE 10/10</div></div>
+  <div class="closing">
+    <div style="margin-top:auto;">
+      <div class="kicker" style="margin-bottom:16px;">THANK YOU</div>
+      <h1 class="massive">{{ARTIST_L1}}<br>{{ARTIST_L2}}.</h1>
+      <div class="city" style="margin-top:18px;">{{CITY}}.</div>
+    </div>
+    <div style="margin-top:auto;">
+      <hr class="thin">
+      <div class="grid2">
+        <div><div class="kicker">DIRECTOR</div><div style="font-size:11pt;">{{DIRECTOR_NAME}}</div><div class="muted" style="font-size:8pt;">{{CONTACT}}</div></div>
+        <div><div class="kicker">PRODUCTION</div><div style="font-size:11pt;">{{STUDIO}}</div><div class="muted" style="font-size:8pt;">{{CITY}}</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="bottombar"><div>{{STUDIO}} · {{CITY}}</div><div>{{ARTIST_L1}} — {{PROJECT_TITLE}} · #{{PROJECT_ID}}</div></div>
+</section>
+
+</body>
+</html>

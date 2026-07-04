@@ -1,9 +1,9 @@
-# PITCHBLACK
+# CALLSHEET
 
-**ONE JSON. EIGHT PAGES. A TREATMENT THAT LANDS ON THE TABLE LIKE IT MEANS IT.**
+**PRODUCTION PAPERWORK FROM ONE JSON FILE. THE DECK, THE DAY, THE DETAILS.**
 
 [![License: MIT](https://img.shields.io/badge/MIT-000000.svg?label=license)](LICENSE)
-[![Node >= 18](https://img.shields.io/badge/node-%3E%3D18-FFE600.svg)](pitchblack.mjs)
+[![Node >= 18](https://img.shields.io/badge/node-%3E%3D18-FFE600.svg)](callsheet.mjs)
 
 ![Deck flip](media/deckflip.gif)
 
@@ -11,66 +11,61 @@
 
 ## 01 / THE PITCH
 
-Music video and commercial treatments are design documents with a 60-second
-attention window, and most of them are built at 2am in software that fights
-back. pitchblack renders the whole deck from one flat JSON file: landscape
-Letter, flood color, 900-weight caps, ink-fill spreads. Fill in the tokens,
-get a PDF you can send before the reference tracks stop playing.
+Every video shoot runs on documents: the treatment that sells it, the call
+sheet that runs the day. Most of them get built at 2am in software that
+fights back. callsheet renders them from flat JSON files, in a design
+language loud enough to survive a producer's inbox: flood color, 900-weight
+caps, ink-fill pages. Fill in the tokens, send the PDF, go scout.
 
-## 02 / THE LOOK
+## 02 / THE DOCUMENTS
 
-![All eight pages](media/pages.png)
+**The treatment.** Eight landscape pages: cover, contents, manifesto, values,
+concept split, shorts board with reference frames, attitude, end card.
 
-Cover · Contents · Manifesto · Values · Concept split · Shorts board ·
-Attitude · End card. The manifesto and attitude pages invert to ink. The
-shorts board takes three reference images and gives each a cut number and a
-one-line shot recipe.
+![All eight treatment pages](media/pages.png)
+
+**The call sheet.** One portrait page that runs the shoot day: general call
+band, location, weather and sun, nearest hospital, the schedule with cut
+numbers, key contacts, notes. Bottom bar says BE ON TIME because it means it.
+
+<img src="media/daysheet.png" width="420" alt="Call sheet" />
 
 ## 03 / RUN IT
 
 ```bash
-git clone https://github.com/vcspr/pitchblack && cd pitchblack
+git clone https://github.com/vcspr/callsheet && cd callsheet
 npm install && npx playwright install chromium
 
-node pitchblack.mjs example/treatment.json
-open out/treatment.pdf
+node callsheet.mjs example/treatment.json            # the deck
+node callsheet.mjs example/day.json --skin callsheet # the day
 ```
 
-Then copy `example/treatment.json`, replace the fiction with your project, and
-drop your reference frames into a `refs/` folder next to it. Every value is a
-flat string. No nesting, no schema to learn.
+Copy an example JSON, replace the fiction with your production, drop
+reference frames in a `refs/` folder next to it. Every value is a flat
+string. No nesting, no schema to learn.
 
 ## 04 / THE SYSTEM
 
-The skin is one HTML file with `{{TOKENS}}`. The renderer replaces every token
+Skins are single HTML files with `{{TOKENS}}`. The renderer fills every token
 from your JSON, copies `refs/` beside the output, and prints through headless
 Chromium so the PDF is exactly what the CSS says. Tokens you skip are warned
 about and blanked, never invented.
 
-| Token group | Drives |
-|---|---|
-| `PAPER_HEX` `INK_HEX` `ACCENT_HEX` | The whole palette. Two hex codes change the deck's mood. |
-| `ARTIST_L1/L2` `PROJECT_TITLE` `DIRECTOR_NAME` `CONTACT` `STUDIO` | Cover and end card |
-| `MANIFESTO_*` `ATTITUDE_*` | The two ink-fill statement spreads, three lines each |
-| `VALUE_01..05` | The values ledger |
-| `CONCEPT_A_*` `CONCEPT_B_*` | The split spread: two directions, side by side |
-| `S1..S3 _REF/_LABEL/_ID/_TAG` | The shorts board image slots |
-
-## 05 / MAKE IT YOURS
+`PAPER_HEX`, `INK_HEX`, and `ACCENT_HEX` drive the entire palette of any
+skin. Same JSON, two hex codes apart:
 
 ![Drench and blackout palettes](media/skins.png)
 
-Same JSON, two hex codes apart. `#FFE600` on black is the drench look;
-`#0E0E0E` paper with `#F4F4F4` ink is the blackout. Skins live in `skins/` as
-plain HTML; copy `drench.html`, change the bones, and pass `--skin yours`.
+## 05 / MAKE IT YOURS
 
-The example refs are hand-built SVG frames, so the repo ships zero
-photography and clones with nothing to license.
+Skins live in `skins/` as plain HTML. Copy one, change the bones, pass
+`--skin yours`. The example refs are hand-built SVG frames, so the repo ships
+zero photography and clones with nothing to license.
 
 ## 06 / END CARD
 
-Coming attractions: a storyboard skin (6-up grid pages), a schedule/budget
-page, and a 16:9 variant for screeners.
+On the slate: shot-list and storyboard skins, a one-line schedule, budget
+top-sheets, and a 16:9 screener variant.
 
 [MIT](LICENSE) © 2026 Victor Uwakwe
 

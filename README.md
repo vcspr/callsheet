@@ -30,14 +30,23 @@ numbers, key contacts, notes. Bottom bar says BE ON TIME because it means it.
 
 <img src="media/daysheet.png" width="420" alt="Call sheet" />
 
+**The monodark treatment.** The heavyweight: ten portrait pages on a 12-column
+modular grid. Thesis and deliverables table, a two-worlds concept split, a
+beat spine cut to the song, a shorts matrix with full shot recipes, grammar,
+locations, palette swatches, and the schedule. Drop images named `hero.jpg`,
+`s1.jpg`, `loc1.jpg`... into `refs/` and the plates fill themselves.
+
+![Monodark treatment pages](media/monodark.png)
+
 ## 03 / RUN IT
 
 ```bash
 git clone https://github.com/vcspr/callsheet && cd callsheet
 npm install && npx playwright install chromium
 
-node callsheet.mjs example/treatment.json            # the deck
-node callsheet.mjs example/day.json --skin callsheet # the day
+node callsheet.mjs example/treatment.json                           # the drench deck
+node callsheet.mjs example/day.json --skin callsheet                # the day
+node callsheet.mjs example/treatment-monodark.json --skin monodark  # the heavyweight
 ```
 
 Copy an example JSON, replace the fiction with your production, drop
@@ -64,7 +73,7 @@ zero photography and clones with nothing to license.
 
 ## 06 / END CARD
 
-On the slate: shot-list and storyboard skins, a one-line schedule, budget
+On the slate: editorial and cinematic treatment skins, shot-list and storyboard skins, a one-line schedule, budget
 top-sheets, and a 16:9 screener variant.
 
 [MIT](LICENSE) © 2026 Victor Uwakwe

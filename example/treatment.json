@@ -1,0 +1,51 @@
+{
+  "STUDIO": "NIGHTREEL",
+  "PAPER_HEX": "#FFE600",
+  "INK_HEX": "#000000",
+  "ACCENT_HEX": "#FF6FB5",
+
+  "ARTIST_L1": "KILO",
+  "ARTIST_L2": "NOVA",
+  "PROJECT_TITLE": "SUPERCUT",
+  "SOUNDTRACK_TAG": "3:12 · ONE TAKE",
+  "CONTACT": "hello@nightreel.example · (555) 013-2077",
+  "DIRECTOR_NAME": "DIR. M. OKONKWO",
+
+  "MANIFESTO_L1": "SHOT ON",
+  "MANIFESTO_L2": "STOLEN",
+  "MANIFESTO_L3": "TIME.",
+  "MANIFESTO_TAG": "EVERY FRAME EARNS IT",
+
+  "VALUE_01": "VELOCITY",
+  "VALUE_02": "GRAIN",
+  "VALUE_03": "SWEAT",
+  "VALUE_04": "NEON",
+  "VALUE_05": "TRUTH",
+
+  "CONCEPT_A_LABEL": "CONCEPT A · PERFORMANCE",
+  "CONCEPT_A_NAME": "THE LOOP",
+  "CONCEPT_A_BODY": "One block, one take, one hour before the light dies. The artist walks the same hundred meters while the city resets around them. Every pass, something is wrong in a new way.",
+
+  "CONCEPT_B_LABEL": "CONCEPT B · NARRATIVE",
+  "CONCEPT_B_NAME": "THE LEAK",
+  "CONCEPT_B_BODY": "The video is the found footage. Security cams, dash cams, a stranger's vertical phone video. The song assembles itself out of what the night recorded.",
+
+  "SHORTS_TOTAL": "9",
+  "SHORTS_HEADLINE": "THE SHORTS",
+  "S1_REF": "cut-01.svg",
+  "S1_LABEL": "ROOFTOP · DUSK",
+  "S1_ID": "CUT 01",
+  "S1_TAG": "rooftop · dusk · 50mm",
+  "S2_REF": "cut-02.svg",
+  "S2_LABEL": "UNDERPASS · SODIUM",
+  "S2_ID": "CUT 02",
+  "S2_TAG": "underpass · sodium vapor · handheld",
+  "S3_REF": "cut-03.svg",
+  "S3_LABEL": "LAUNDROMAT · 4AM",
+  "S3_ID": "CUT 03",
+  "S3_TAG": "laundromat · 4am · locked off",
+
+  "ATTITUDE_L1": "LOUD.",
+  "ATTITUDE_L2": "FAST.",
+  "ATTITUDE_L3": "GONE."
+}

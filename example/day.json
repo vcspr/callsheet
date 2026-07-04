@@ -1,0 +1,35 @@
+{
+  "STUDIO": "NIGHTREEL",
+  "PAPER_HEX": "#FFE600",
+  "INK_HEX": "#000000",
+  "ACCENT_HEX": "#FF6FB5",
+
+  "PROJECT_TITLE": "SUPERCUT",
+  "ARTIST_L1": "KILO NOVA",
+  "SHOOT_DATE": "SAT 07.18",
+  "DAY_NUM": "2",
+  "DAY_TOTAL": "3",
+  "GENERAL_CALL": "06:30",
+
+  "LOCATION_NAME": "EASTBANK ROOFTOP",
+  "LOCATION_ADDR": "400 Frame St · Portland, OR",
+  "WEATHER": "CLEAR · 74°F",
+  "SUNRISE": "05:42",
+  "SUNSET": "20:51",
+  "HOSPITAL": "Riverside General · 1200 Bridge Ave · 8 min",
+
+  "SCH_01_TIME": "06:30", "SCH_01_SCENE": "—",    "SCH_01_ITEM": "Crew call · breakfast · safety brief",
+  "SCH_02_TIME": "07:15", "SCH_02_SCENE": "CUT 1", "SCH_02_ITEM": "Rooftop loop · 50mm · artist walk-through",
+  "SCH_03_TIME": "10:00", "SCH_03_SCENE": "CUT 4", "SCH_03_ITEM": "Rooftop b-roll · drone window (permit 10-12)",
+  "SCH_04_TIME": "12:30", "SCH_04_SCENE": "—",    "SCH_04_ITEM": "Lunch · company move to underpass",
+  "SCH_05_TIME": "14:00", "SCH_05_SCENE": "CUT 2", "SCH_05_ITEM": "Underpass · sodium vapor · handheld coverage",
+  "SCH_06_TIME": "19:30", "SCH_06_SCENE": "CUT 7", "SCH_06_ITEM": "Golden hour finale · one take · MARTINI",
+
+  "CON_01_ROLE": "Director",          "CON_01_NAME": "M. Okonkwo",  "CON_01_PHONE": "(555) 013-2077",
+  "CON_02_ROLE": "1st AD",            "CON_02_NAME": "R. Vasquez",  "CON_02_PHONE": "(555) 013-4410",
+  "CON_03_ROLE": "DP",                "CON_03_NAME": "J. Laurent",  "CON_03_PHONE": "(555) 013-8821",
+  "CON_04_ROLE": "Producer",          "CON_04_NAME": "T. Adeyemi",  "CON_04_PHONE": "(555) 013-6633",
+  "CON_05_ROLE": "Location Manager",  "CON_05_NAME": "S. Park",     "CON_05_PHONE": "(555) 013-9042",
+
+  "NOTES": "Closed-toe shoes on the roof deck. Drone window is hard 10:00-12:00 per permit. Hydrate; no shade at the underpass until 15:00."
+}

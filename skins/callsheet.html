@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Call Sheet — {{PROJECT_TITLE}}</title>
+<style>
+@page { size: Letter portrait; margin: 0; }
+:root { --paper: {{PAPER_HEX}}; --ink: {{INK_HEX}}; --accent: {{ACCENT_HEX}}; --font: "Helvetica Neue", "Inter", system-ui, sans-serif; }
+* { box-sizing: border-box; }
+html, body { background: #2c2c2c; color: var(--ink); font-family: var(--font); font-size: 10pt; line-height: 1.35; margin: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-weight: 900; }
+.page { background: var(--paper); width: 8.5in; height: 11in; padding: 0.38in 0.45in; margin: 0 auto; position: relative; display: flex; flex-direction: column; overflow: hidden; }
+@media screen { .page { box-shadow: 0 1px 3px rgba(0,0,0,0.3); margin: 12px auto; } }
+.topbar, .bottombar { display: flex; justify-content: space-between; align-items: center; font-size: 8.5pt; letter-spacing: 0.02em; text-transform: uppercase; }
+.topbar { border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 5px 0; }
+.bottombar { border-top: 2px solid var(--ink); padding: 5px 0; margin-top: auto; }
+.head { display: flex; justify-content: space-between; align-items: flex-end; margin: 14px 0 10px; }
+.head h1 { font-weight: 900; font-size: 54pt; line-height: 0.85; letter-spacing: -0.03em; text-transform: uppercase; margin: 0; }
+.head .day { text-align: right; }
+.head .day .n { font-size: 34pt; line-height: 0.9; letter-spacing: -0.02em; }
+.head .day .d { font-size: 10pt; text-transform: uppercase; margin-top: 4px; }
+.callband { background: var(--ink); color: var(--paper); display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; margin: 6px 0 12px; }
+.callband .l { font-size: 13pt; text-transform: uppercase; letter-spacing: 0.02em; }
+.callband .t { font-size: 34pt; letter-spacing: -0.02em; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; border: 2px solid var(--ink); margin-bottom: 12px; }
+.grid3 > div { padding: 10px 12px; }
+.grid3 > div + div { border-left: 2px solid var(--ink); }
+.grid3 .k { font-size: 8.5pt; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 4px; }
+.grid3 .v { font-size: 10.5pt; font-weight: 700; text-transform: none; }
+h3.sec { font-weight: 900; font-size: 12pt; letter-spacing: 0.02em; text-transform: uppercase; margin: 10px 0 6px; }
+table { width: 100%; border-collapse: collapse; }
+.sched td { border: 2px solid var(--ink); padding: 7px 10px; font-weight: 700; font-size: 10pt; }
+.sched td.time { width: 90px; font-weight: 900; font-size: 11pt; }
+.sched td.scene { width: 70px; font-weight: 900; }
+.contacts td { border-bottom: 2px solid var(--ink); padding: 6px 8px 6px 0; font-weight: 700; font-size: 10pt; }
+.contacts td.role { width: 200px; text-transform: uppercase; font-size: 8.5pt; letter-spacing: 0.02em; font-weight: 900; }
+.contacts td.phone { width: 150px; text-align: right; font-weight: 900; }
+.notes { border: 2px solid var(--ink); padding: 9px 12px; margin-top: 10px; font-weight: 700; font-size: 9.5pt; text-transform: none; }
+.notes .k { font-weight: 900; text-transform: uppercase; font-size: 8.5pt; letter-spacing: 0.03em; }
+</style></head>
+<body>
+<section class="page">
+  <div class="topbar"><div>{{STUDIO}} · {{PROJECT_TITLE}} · {{ARTIST_L1}}</div><div>CALL SHEET · {{SHOOT_DATE}}</div></div>
+
+  <div class="head">
+    <h1>CALL<br>SHEET.</h1>
+    <div class="day">
+      <div class="n">DAY {{DAY_NUM}} / {{DAY_TOTAL}}</div>
+      <div class="d">{{SHOOT_DATE}}</div>
+    </div>
+  </div>
+
+  <div class="callband"><div class="l">General Call</div><div class="t">{{GENERAL_CALL}}</div></div>
+
+  <div class="grid3">
+    <div><div class="k">Location</div><div class="v">{{LOCATION_NAME}}<br>{{LOCATION_ADDR}}</div></div>
+    <div><div class="k">Weather · Sun</div><div class="v">{{WEATHER}}<br>UP {{SUNRISE}} · DOWN {{SUNSET}}</div></div>
+    <div><div class="k">Nearest Hospital</div><div class="v">{{HOSPITAL}}</div></div>
+  </div>
+
+  <h3 class="sec">Schedule</h3>
+  <table class="sched">
+    <tr><td class="time">{{SCH_01_TIME}}</td><td class="scene">{{SCH_01_SCENE}}</td><td>{{SCH_01_ITEM}}</td></tr>
+    <tr><td class="time">{{SCH_02_TIME}}</td><td class="scene">{{SCH_02_SCENE}}</td><td>{{SCH_02_ITEM}}</td></tr>
+    <tr><td class="time">{{SCH_03_TIME}}</td><td class="scene">{{SCH_03_SCENE}}</td><td>{{SCH_03_ITEM}}</td></tr>
+    <tr><td class="time">{{SCH_04_TIME}}</td><td class="scene">{{SCH_04_SCENE}}</td><td>{{SCH_04_ITEM}}</td></tr>
+    <tr><td class="time">{{SCH_05_TIME}}</td><td class="scene">{{SCH_05_SCENE}}</td><td>{{SCH_05_ITEM}}</td></tr>
+    <tr><td class="time">{{SCH_06_TIME}}</td><td class="scene">{{SCH_06_SCENE}}</td><td>{{SCH_06_ITEM}}</td></tr>
+  </table>
+
+  <h3 class="sec">Key Contacts</h3>
+  <table class="contacts">
+    <tr><td class="role">{{CON_01_ROLE}}</td><td>{{CON_01_NAME}}</td><td class="phone">{{CON_01_PHONE}}</td></tr>
+    <tr><td class="role">{{CON_02_ROLE}}</td><td>{{CON_02_NAME}}</td><td class="phone">{{CON_02_PHONE}}</td></tr>
+    <tr><td class="role">{{CON_03_ROLE}}</td><td>{{CON_03_NAME}}</td><td class="phone">{{CON_03_PHONE}}</td></tr>
+    <tr><td class="role">{{CON_04_ROLE}}</td><td>{{CON_04_NAME}}</td><td class="phone">{{CON_04_PHONE}}</td></tr>
+    <tr><td class="role">{{CON_05_ROLE}}</td><td>{{CON_05_NAME}}</td><td class="phone">{{CON_05_PHONE}}</td></tr>
+  </table>
+
+  <div class="notes"><span class="k">Notes · </span>{{NOTES}}</div>
+
+  <div class="bottombar"><div>{{STUDIO}} · {{PROJECT_TITLE}} · DAY {{DAY_NUM}}</div><div>BE ON TIME.</div></div>
+</section>
+</body></html>

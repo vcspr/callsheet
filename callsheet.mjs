@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * pitchblack — treatment decks from a JSON file.
+ * callsheet — production paperwork from a JSON file.
  *
- *   node pitchblack.mjs example/treatment.json
- *   node pitchblack.mjs my-video.json --skin drench --out out
+ *   node callsheet.mjs example/treatment.json
+ *   node callsheet.mjs my-video.json --skin drench --out out
  *
  * The JSON is a flat map of TOKEN -> value. Every {{TOKEN}} in the skin gets
  * replaced; anything you leave out is warned about and blanked. A refs/
@@ -19,7 +19,7 @@ const opt = (n, d) => { const i = argv.indexOf(n); return i >= 0 && argv[i + 1] 
 const flag = (n) => argv.includes(n);
 
 const jsonPath = argv.find((a) => a.endsWith(".json"));
-if (!jsonPath) { console.error("Usage: node pitchblack.mjs <treatment.json> [--skin drench] [--out out] [--no-pdf]"); process.exit(1); }
+if (!jsonPath) { console.error("Usage: node callsheet.mjs <treatment.json> [--skin drench] [--out out] [--no-pdf]"); process.exit(1); }
 
 const skin = opt("--skin", "drench");
 const OUT = resolve(opt("--out", "out"));

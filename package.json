@@ -1,13 +1,13 @@
 {
-  "name": "pitchblack",
+  "name": "callsheet",
   "version": "0.1.0",
-  "description": "Treatment decks from one JSON file. Landscape Letter, flood color, 900-weight caps.",
+  "description": "Production paperwork from one JSON file. Treatments and call sheets in flood color and 900-weight caps.",
   "type": "module",
-  "scripts": { "demo": "node pitchblack.mjs example/treatment.json" },
+  "scripts": { "demo": "node callsheet.mjs example/treatment.json" },
   "keywords": ["treatment", "pitch-deck", "music-video", "pdf", "playwright", "design"],
   "author": "Victor Uwakwe (https://github.com/vcspr)",
   "license": "MIT",
-  "repository": { "type": "git", "url": "https://github.com/vcspr/pitchblack.git" },
+  "repository": { "type": "git", "url": "https://github.com/vcspr/callsheet.git" },
   "engines": { "node": ">=18" },
   "dependencies": { "playwright": "^1.49.0" }
 }

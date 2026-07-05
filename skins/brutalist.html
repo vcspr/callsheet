@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Treatment — {{PROJECT_TITLE}}</title>
+<style>
+/* brutalist — landscape, monospace, exposed grid, heavy rules. Reuses the editorial token set. */
+@page { size: Letter landscape; margin: 0; }
+:root {
+  --paper: {{PAPER_HEX}}; --ink: {{INK_HEX}}; --accent: {{ACCENT_HEX}}; --muted: {{MUTED_HEX}};
+  --rule: var(--ink);
+  --mono: "SF Mono","SFMono-Regular",ui-monospace,Menlo,Consolas,"Liberation Mono",monospace;
+}
+* { box-sizing: border-box; }
+html, body { background: #2c2c2c; color: var(--ink); font-family: var(--mono); font-size: 9pt; line-height: 1.45; margin: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+@media print { html, body { background: var(--paper); } }
+.page { background: var(--paper); width: 11in; height: 8.5in; padding: 0.5in; margin: 0 auto; page-break-after: always; position: relative; display: flex; flex-direction: column; overflow: hidden; }
+@media screen { .page { box-shadow: 0 1px 3px rgba(0,0,0,0.3); margin: 12px auto; } }
+.topbar { display: flex; justify-content: space-between; font-size: 7.5pt; letter-spacing: 0.12em; text-transform: uppercase; border-bottom: 2px solid var(--rule); padding-bottom: 6px; margin-bottom: 20px; }
+.bottombar { display: flex; justify-content: space-between; margin-top: auto; padding-top: 6px; border-top: 2px solid var(--rule); font-size: 7.5pt; letter-spacing: 0.1em; text-transform: uppercase; }
+.eyebrow { font-size: 8pt; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+h1.title { font-family: var(--mono); font-weight: 700; font-size: 62pt; line-height: 0.94; letter-spacing: -0.02em; text-transform: uppercase; margin: 0; }
+h2.subhead { font-weight: 700; font-size: 30pt; letter-spacing: -0.01em; text-transform: uppercase; line-height: 1.02; margin: 0 0 14px; }
+p.body { font-size: 9.5pt; line-height: 1.55; max-width: 4.8in; }
+.accent { color: var(--accent); }
+.tag { display: inline-block; border: 2px solid var(--ink); padding: 2px 8px; font-size: 7.5pt; letter-spacing: 0.14em; text-transform: uppercase; }
+.imgzone { border: 1px solid var(--ink); position: relative; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 7pt; letter-spacing: 0.16em; text-transform: uppercase; min-height: 100px; overflow: hidden; }
+.imgzone img.ref { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.imgzone.tall { min-height: 5in; }
+.cover-grid { flex: 1; display: grid; grid-template-columns: 1fr 1.05fr; gap: 0; border: 2px solid var(--ink); }
+.cover-grid .imgzone { border: 0; border-right: 2px solid var(--ink); height: 100%; }
+.cover-grid .copy { padding: 28px; display: flex; flex-direction: column; justify-content: space-between; }
+.index-col { display: grid; grid-template-columns: 44px 1fr; gap: 0 18px; flex: 1; align-content: start; }
+.index-col .n { font-size: 11pt; font-weight: 700; padding: 12px 0; border-top: 1px solid var(--ink); }
+.index-col .l { font-size: 13pt; padding: 12px 0; border-top: 1px solid var(--ink); text-transform: uppercase; letter-spacing: 0.04em; }
+.concept-spread { flex: 1; display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; align-items: stretch; border: 2px solid var(--ink); }
+.concept-spread .word { font-weight: 700; font-size: 46pt; letter-spacing: -0.01em; text-transform: uppercase; padding: 28px; display: flex; align-items: center; }
+.concept-spread .word.right { justify-content: flex-end; text-align: right; border-left: 2px solid var(--ink); }
+.concept-spread .imgzone { width: 2.6in; border: 0; border-left: 2px solid var(--ink); border-right: 2px solid var(--ink); }
+.cat-grid { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 2px solid var(--ink); border-right: 0; border-bottom: 0; }
+.cat-cell { border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 14px; }
+.cat-cell .imgzone { aspect-ratio: 4/5; min-height: 0; margin-bottom: 10px; }
+.cat-cell .n { font-size: 8pt; color: var(--muted); }
+.cat-cell .name { font-weight: 700; font-size: 11pt; text-transform: uppercase; }
+.cat-cell .desc { font-size: 8pt; color: var(--muted); line-height: 1.4; margin-top: 5px; }
+.hier { flex: 1; display: grid; grid-template-columns: 1.2fr 2fr; gap: 0; border: 2px solid var(--ink); }
+.hier .left { font-size: 8.5pt; color: var(--muted); line-height: 1.5; padding: 22px; border-right: 2px solid var(--ink); }
+.hier .left h3 { font-weight: 700; font-size: 10pt; color: var(--ink); margin: 16px 0 0; }
+.hier .right { padding: 22px; }
+.hier .right h2 { font-weight: 700; font-size: 40pt; line-height: 0.98; margin: 0 0 16px; letter-spacing: -0.02em; text-transform: uppercase; }
+.hier .right h3 { font-weight: 700; font-size: 15pt; margin: 16px 0 6px; text-transform: uppercase; }
+.hier .right p { font-size: 9.5pt; line-height: 1.55; max-width: 5in; }
+.palette-row { display: grid; grid-template-columns: 70px 1fr 1fr 2fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--ink); font-size: 9pt; align-items: center; }
+.palette-row .sw { width: 56px; height: 56px; border: 1px solid var(--ink); }
+.palette-row .nm { font-weight: 700; text-transform: uppercase; }
+.split { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 2px solid var(--ink); }
+.split .imgzone { border: 0; border-right: 2px solid var(--ink); height: 100%; min-height: 0; }
+.split .copy { padding: 28px; display: flex; flex-direction: column; justify-content: center; }
+.mood-spread { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr 1fr; gap: 0; border: 2px solid var(--ink); border-right: 0; border-bottom: 0; }
+.mood-spread .imgzone { border: 0; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); min-height: 0; }
+.closing { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border: 2px solid var(--ink); }
+.closing h1 { font-weight: 700; font-size: 74pt; letter-spacing: -0.02em; text-transform: uppercase; margin: 0; }
+.closing .sig { color: var(--muted); margin-top: 22px; font-size: 9pt; letter-spacing: 0.08em; text-transform: uppercase; }
+</style></head>
+<body>
+
+<!-- 01 COVER -->
+<section class="page">
+  <div class="topbar"><div>{{STUDIO}} / BRUTALIST / TREATMENT</div><div>#{{PROJECT_ID}} / 01–10</div></div>
+  <div class="cover-grid">
+    <div class="imgzone tall"><img class="ref" src="refs/hero.jpg" onerror="this.remove()"><span>[ HERO MOOD PLATE ]</span></div>
+    <div class="copy">
+      <div><span class="tag">{{COVER_TAG}}</span></div>
+      <h1 class="title">{{ARTIST_L1}}<br>{{ARTIST_L2}}</h1>
+      <p class="body">{{COVER_BODY}}</p>
+    </div>
+  </div>
+  <div class="bottombar"><div>{{STUDIO}} / {{CITY}}</div><div>{{CONTACT}}</div></div>
+</section>
+
+<!-- 02 INDEX -->
+<section class="page">
+  <div class="topbar"><div>INDEX</div><div>02 / 10</div></div>
+  <div class="index-col">
+    <div class="n">01</div><div class="l">Concept</div>
+    <div class="n">02</div><div class="l">The shorts</div>
+    <div class="n">03</div><div class="l">Hierarchy &amp; tone</div>
+    <div class="n">04</div><div class="l">Palette</div>
+    <div class="n">05</div><div class="l">{{SPLIT_TOC}}</div>
+    <div class="n">06</div><div class="l">Moodboard</div>
+    <div class="n">07</div><div class="l">Locations</div>
+    <div class="n">08</div><div class="l">Closing</div>
+  </div>
+  <div class="bottombar"><div>{{STUDIO}} / {{CITY}}</div><div>Brutalist treatment</div></div>
+</section>
+
+<!-- 03 CONCEPT -->
+<section class="page">
+  <div class="topbar"><div>01 / CONCEPT</div><div>03 / 10</div></div>
+  <div class="concept-spread">
+    <div class="word">{{CONCEPT_A_NAME}}</div>
+    <div class="imgzone"><img class="ref" src="refs/concept.jpg" onerror="this.remove()"><span>[ CONCEPT PLATE ]</span></div>
+    <div class="word right">{{CONCEPT_B_NAME}}</div>
+  </div>
+  <p class="body" style="margin: 16px auto 0; text-align: center; max-width: 7in; color: var(--muted);">{{CONCEPT_LEDE}}</p>
+  <div class="bottombar"><div>{{STUDIO}} / {{CITY}}</div><div>{{ARTIST_L1}} / {{PROJECT_TITLE}}</div></div>
+</section>
+
+<!-- 04 THE SHORTS -->
+<section class="page">
+  <div class="topbar"><div>02 / THE SHORTS</div><div>04 / 10</div></div>
+  <h2 class="subhead">The shorts</h2>
+  <p class="body" style="margin-bottom: 18px;">{{SHORTS_LEDE}}</p>
+  <div class="cat-grid">
+    <div class="cat-cell"><div class="imgzone"><img class="ref" src="refs/cat1.jpg" onerror="this.remove()"><span>[ {{CAT_01_NAME}} ]</span></div><div class="n">01</div><div class="name">{{CAT_01_NAME}}</div><div class="desc">{{CAT_01_DESC}}</div></div>
+    <div class="cat-cell"><div class="imgzone"><img class="ref" src="refs/cat2.jpg" onerror="this.remove()"><span>[ {{CAT_02_NAME}} ]</span></div><div class="n">02</div><div class="name">{{CAT_02_NAME}}</div><div class="desc">{{CAT_02_DESC}}</div></div>
+    <div class="cat-cell"><div class="imgzone"><img class="ref" src="refs/cat3.jpg" onerror="this.remove()"><span>[ {{CAT_03_NAME}} ]</span></div><div class="n">03</div><div class="name">{{CAT_03_NAME}}</div><div class="desc">{{CAT_03_DESC}}</div></div>
+    <div class="cat-cell"><div class="imgzone"><img class="ref" src="refs/cat4.jpg" onerror="this.remove()"><span>[ {{CAT_04_NAME}} ]</span></div><div class="n">04</div><div class="name">{{CAT_04_NAME}}</div><div class="desc">{{CAT_04_DESC}}</div></div>
+  </div>
+  <div class="bottombar"><div>{{STUDIO}} / {{CITY}}</div><div>4 of {{SHORTS_TOTAL}} shown</div></div>
+</section>
+
+<!-- 05 HIERARCHY & TONE -->
+<section class="page">
+  <div class="topbar"><div>03 / HIERARCHY &amp; TONE</div><div>05 / 10</div></div>
+  <div class="hier">
+    <div class="left">
+      <p>Recommended weights and hierarchy for all campaign copy.</p>
+      <h3>H1 · Bold · 40pt / -2%</h3>
+      <h3>H3 · Bold · 15pt</h3>
+      <h3>Body · Mono · 9.5pt / 1.55</h3>
+    </div>
+    <div class="right">
+      <h2>{{TONE_H2}}</h2>
+      <h3>{{TONE_A_H3}}</h3>
+      <p>{{TONE_A_BODY}}</p>
+      <h3>{{TONE_B_H3}}</h3>
+      <p>{{TONE_B_BODY}}</p>
+    </div>
+  </div>
+  <div class="bottombar"><div>{{STUDIO}} / {{CITY}}</div><div>Typography sample</div></div>
+</section>
+
+<!-- 06 PALETTE -->
+<section class="page">
+  <div class="topbar"><div>04 / PALETTE</div><div>06 / 10</div></div>
+  <h2 class="subhead">Primary palette</h2>
+  <p class="body" style="margin-bottom: 16px;">{{GRADE_LEDE}}</p>
+  <div style="flex:1;">
+    <div class="palette-row"><div class="sw" style="background:{{SW_01_HEX}};"></div><div class="nm">{{SW_01_NAME}}</div><div>{{SW_01_HEX}}</div><div>{{SW_01_USE}}</div></div>
+    <div class="palette-row"><div class="sw" style="background:{{SW_02_HEX}};"></div><div class="nm">{{SW_02_NAME}}</div><div>{{SW_02_HEX}}</div><div>{{SW_02_USE}}</div></div>
+    <div class="palette-row"><div class="sw" style="background:{{SW_03_HEX}};"></div><div class="nm">{{SW_03_NAME}}</div><div>{{SW_03_HEX}}</div><div>{{SW_03_USE}}</div></div>
+    <div class="palette-row"><div class="sw" style="background:{{SW_04_HEX}};"></div><div class="nm">{{SW_04_NAME}}</div><div>{{SW_04_HEX}}</div><div>{{SW_04_USE}}</div></div>
+    <div class="palette-row"><div class="sw" style="background:{{SW_05_HEX}};"></div><div class="nm">{{SW_05_NAME}}</div><div>{{SW_05_HEX}}</div><div>{{SW_05_USE}}</div></div>
+  </div>
+  <div class="bottombar"><div>{{STUDIO}} / {{CITY}}</div><div>5 colors</div></div>
+</section>
+
+<!-- 07 SPLIT FEATURE -->
+<section class="page">
+  <div class="topbar"><div>05 / {{SPLIT_EYEBROW}}</div><div>07 / 10</div></div>
+  <div class="split">
+    <div class="imgzone"><img class="ref" src="refs/split.jpg" onerror="this.remove()"><span>[ FEATURE PLATE ]</span></div>
+    <div class="copy">
+      <h2 class="subhead">{{SPLIT_TITLE}}</h2>
+      <p class="body" style="margin-top: 10px;">{{SPLIT_BODY}}</p>
+      <h3 style="margin-top: 16px; text-transform: uppercase; font-size: 10pt;">Characteristics</h3>
+      <p class="body" style="font-size: 8.5pt; color: var(--muted);">{{SPLIT_CHAR}}</p>
+    </div>
+  </div>
+</section>
+
+<!-- 08 MOODBOARD -->
+<section class="page">
+  <div class="topbar"><div>06 / MOODBOARD</div><div>08 / 10</div></div>
+  <h2 class="subhead" style="margin-bottom: 14px;">Stills reference</h2>
+  <div class="mood-spread">
+    <div class="imgzone"><img class="ref" src="refs/mood1.jpg" onerror="this.remove()"><span>[ {{MOOD_01}} ]</span></div>
+    <div class="imgzone"><img class="ref" src="refs/mood2.jpg" onerror="this.remove()"><span>[ {{MOOD_02}} ]</span></div>
+    <div class="imgzone"><img class="ref" src="refs/mood3.jpg" onerror="this.remove()"><span>[ {{MOOD_03}} ]</span></div>
+    <div class="imgzone"><img class="ref" src="refs/mood4.jpg" onerror="this.remove()"><span>[ {{MOOD_04}} ]</span></div>
+    <div class="imgzone"><img class="ref" src="refs/mood5.jpg" onerror="this.remove()"><span>[ {{MOOD_05}} ]</span></div>
+    <div class="imgzone"><img class="ref" src="refs/mood6.jpg" onerror="this.remove()"><span>[ {{MOOD_06}} ]</span></div>
+    <div class="imgzone"><img class="ref" src="refs/mood7.jpg" onerror="this.remove()"><span>[ {{MOOD_07}} ]</span></div>
+    <div class="imgzone"><img class="ref" src="refs/mood8.jpg" onerror="this.remove()"><span>[ {{MOOD_08}} ]</span></div>
+  </div>
+  <div class="bottombar"><div>{{STUDIO}} / {{CITY}}</div><div>8 mood plates</div></div>
+</section>
+
+<!-- 09 LOCATIONS -->
+<section class="page">
+  <div class="topbar"><div>07 / LOCATIONS</div><div>09 / 10</div></div>
+  <h2 class="subhead">{{LOC_LEDE}}</h2>
+  <div class="cat-grid" style="margin-top: 16px;">
+    <div class="cat-cell"><div class="imgzone"><img class="ref" src="refs/loc1.jpg" onerror="this.remove()"><span>[ LOC 01 ]</span></div><div class="n">01 · {{LOC_01_TIMES}}</div><div class="name">{{LOC_01_NAME}}</div></div>
+    <div class="cat-cell"><div class="imgzone"><img class="ref" src="refs/loc2.jpg" onerror="this.remove()"><span>[ LOC 02 ]</span></div><div class="n">02 · {{LOC_02_TIMES}}</div><div class="name">{{LOC_02_NAME}}</div></div>
+    <div class="cat-cell"><div class="imgzone"><img class="ref" src="refs/loc3.jpg" onerror="this.remove()"><span>[ LOC 03 ]</span></div><div class="n">03 · {{LOC_03_TIMES}}</div><div class="name">{{LOC_03_NAME}}</div></div>
+    <div class="cat-cell"><div class="imgzone"><img class="ref" src="refs/loc4.jpg" onerror="this.remove()"><span>[ LOC 04 ]</span></div><div class="n">04 · {{LOC_04_TIMES}}</div><div class="name">{{LOC_04_NAME}}</div></div>
+  </div>
+  <div class="bottombar"><div>{{STUDIO}} / {{CITY}}</div><div>{{SCHED_NOTE}}</div></div>
+</section>
+
+<!-- 10 CLOSING -->
+<section class="page">
+  <div class="topbar"><div>CLOSING</div><div>10 / 10</div></div>
+  <div class="closing">
+    <div class="eyebrow accent">— thank you —</div>
+    <h1>{{ARTIST_L1}}<br><span class="accent">{{CITY}}</span></h1>
+    <div class="sig">{{DIRECTOR_NAME}} / {{STUDIO}} / {{CONTACT}}</div>
+  </div>
+  <div class="bottombar"><div>{{STUDIO}} / Brutalist treatment</div><div>#{{PROJECT_ID}}</div></div>
+</section>
+
+</body></html>

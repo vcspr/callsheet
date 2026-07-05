@@ -43,6 +43,10 @@ whitespace, a dark serif director's deck with full-bleed plates, and the
 one-sheet shot list that runs the camera department: seven columns, cut
 numbers, an anchor row where the whole edit turns.
 
+**Brutalist.** A raw monospace treatment on the same ten-page landscape spine:
+exposed grid rules, bordered plates, big bold uppercase type. Reuses the editorial
+token set, so any editorial treatment JSON renders it with `--skin brutalist`.
+
 ![Editorial, cinematic, and shot list skins](media/skins-batch2.png)
 
 ## 03 / RUN IT
@@ -56,6 +60,7 @@ node callsheet.mjs example/day.json --skin callsheet                # the day
 node callsheet.mjs example/treatment-monodark.json --skin monodark  # the heavyweight
 node callsheet.mjs example/treatment-editorial.json --skin editorial
 node callsheet.mjs example/treatment-cinematic.json --skin cinematic
+node callsheet.mjs example/treatment-editorial.json --skin brutalist # raw + monospace
 node callsheet.mjs example/shots.json --skin shotlist              # the camera dept
 ```
 
